@@ -16,7 +16,8 @@ const Estatistica = () => {
     ddz: 'Todos',
     escola: 'Todos',
     ano: 'Todos',
-    turma: 'Todos'
+    turma: 'Todos',
+    questao: 'Todos'
   });
 
   useEffect(() => {
@@ -25,6 +26,50 @@ const Estatistica = () => {
 
   const handleFilterChange = (key, value) => {
     const newFilters = { ...filters, [key]: value };
+    setFilters(newFilters);
+    fetchData(newFilters);
+  };
+
+  // Função para aplicar filtro ao clicar em um item
+  const handleItemClick = (filterType, value) => {
+    console.log(`Aplicando filtro: ${filterType} = ${value}`);
+    
+    let newFilters = { ...filters };
+    
+    // Aplicar o filtro específico
+    switch (filterType) {
+      case 'simulado':
+        newFilters.simulado = value;
+        break;
+      case 'ddz':
+        newFilters.ddz = value;
+        break;
+      case 'escola':
+        newFilters.escola = value;
+        break;
+      case 'ano':
+        newFilters.ano = value;
+        break;
+      case 'turma':
+        newFilters.turma = value;
+        break;
+      default:
+        break;
+    }
+    
+    console.log('Novos filtros após clique:', newFilters);
+    setFilters(newFilters);
+    fetchData(newFilters);
+  };
+
+  // Função para limpar filtro específico
+  const handleClearSpecificFilter = (filterType) => {
+    console.log(`Limpando filtro: ${filterType}`);
+    
+    let newFilters = { ...filters };
+    newFilters[filterType] = 'Todos';
+    
+    console.log('Novos filtros após limpeza:', newFilters);
     setFilters(newFilters);
     fetchData(newFilters);
   };
@@ -65,7 +110,8 @@ const Estatistica = () => {
       ddz: 'Todos',
       escola: 'Todos',
       ano: 'Todos',
-      turma: 'Todos'
+      turma: 'Todos',
+      questao: 'Todos'
     };
     setFilters(clearedFilters);
     fetchData(clearedFilters);
@@ -98,12 +144,22 @@ const Estatistica = () => {
             % Acertos por Questão
           </h2>
         </div>
-        <GraficoColuna data={data.graficoColuna} loading={loading} />
+        <GraficoColuna 
+          data={data.graficoColuna} 
+          loading={loading}
+          onItemClick={handleItemClick}
+          onClearFilter={handleClearSpecificFilter}
+        />
       </div>
 
       {/* Tabela de dados */}
       <div className="mx-8 mb-8">
-        <TabelaItem data={data.tabelaItem} loading={loading} />
+        <TabelaItem 
+          data={data.tabelaItem} 
+          loading={loading}
+          onItemClick={handleItemClick}
+          onClearFilter={handleClearSpecificFilter}
+        />
       </div>
     </div>
   );

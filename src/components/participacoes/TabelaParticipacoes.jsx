@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const TabelaParticipacoes = ({ data, loading }) => {
+const TabelaParticipacoes = ({ data, loading, onItemClick, onClearFilter }) => {
   console.log('TabelaParticipacoes recebeu dados:', data, 'loading:', loading);
 
   // Estado para controlar a ordenação
@@ -48,6 +48,14 @@ const TabelaParticipacoes = ({ data, loading }) => {
       direction = 'desc';
     }
     setSortConfig({ key, direction });
+  };
+
+  // Função para lidar com clique na linha da tabela
+  const handleRowClick = (distrito) => {
+    if (distrito) {
+      console.log(`Clicou no distrito da tabela: ${distrito}`);
+      onItemClick('distrito', distrito);
+    }
   };
 
   // Dados ordenados
@@ -196,7 +204,12 @@ const TabelaParticipacoes = ({ data, loading }) => {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {sortedData.map((item, index) => (
-              <tr key={index} className="hover:bg-gray-50">
+              <tr 
+                key={index} 
+                className="hover:bg-gray-50 cursor-pointer transition-colors duration-150" 
+                onClick={() => handleRowClick(item['participacoes_saeb.distrito'])}
+                title="Clique para filtrar por este distrito"
+              >
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   {item['participacoes_saeb.distrito'] || 'Distrito'}
                 </td>

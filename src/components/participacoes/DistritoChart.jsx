@@ -21,7 +21,7 @@ ChartJS.register(
   ChartDataLabels
 );
 
-const DistritoChart = ({ data, loading }) => {
+const DistritoChart = ({ data, loading, onItemClick, onClearFilter }) => {
   if (loading) {
     return (
       <div className="h-64 bg-gray-100 rounded-lg flex items-center justify-center">
@@ -38,6 +38,19 @@ const DistritoChart = ({ data, loading }) => {
       </div>
     );
   }
+
+  // Função para lidar com clique no gráfico
+  const handleChartClick = (event, elements) => {
+    if (elements && elements.length > 0) {
+      const element = elements[0];
+      const distrito = data[element.index]['participacoes_saeb.distrito'];
+      
+      if (distrito) {
+        console.log(`Clicou no distrito: ${distrito}`);
+        onItemClick('distrito', distrito);
+      }
+    }
+  };
 
   // Processar dados para o formato do Chart.js
   // Usando os nomes corretos dos campos da API
@@ -72,6 +85,7 @@ const DistritoChart = ({ data, loading }) => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    onClick: handleChartClick,
     layout: {
       padding: {
         top: 20,

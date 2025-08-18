@@ -19,6 +19,7 @@ const buildLookerFilters = (currentFilters) => {
 const Participacoes = () => {
   const [filters, setFilters] = useState({
     simulado: 'Todos',
+    distrito: 'Todos',
     escola: 'Todos',
     fase: 'Todos',
     turma: 'Todos'
@@ -73,13 +74,54 @@ const Participacoes = () => {
   const handleClearFilters = () => {
     const clearedFilters = {
       simulado: 'Todos',
+      distrito: 'Todos',
       escola: 'Todos',
       fase: 'Todos',
       turma: 'Todos'
     };
-    console.log('Limpando filtros:', clearedFilters);
     setFilters(clearedFilters);
     fetchData(clearedFilters);
+  };
+
+  // Função para aplicar filtro ao clicar em um item
+  const handleItemClick = (filterType, value) => {
+    console.log(`Aplicando filtro: ${filterType} = ${value}`);
+    
+    let newFilters = { ...filters };
+    
+    // Aplicar o filtro específico
+    switch (filterType) {
+      case 'distrito':
+        newFilters.distrito = value;
+        break;
+      case 'escola':
+        newFilters.escola = value;
+        break;
+      case 'fase':
+        newFilters.fase = value;
+        break;
+      case 'turma':
+        newFilters.turma = value;
+        break;
+      default:
+        break;
+    }
+    
+    console.log('Novos filtros após clique:', newFilters);
+    setFilters(newFilters);
+    fetchData(newFilters);
+  };
+
+  // Função para limpar filtro específico
+  const handleClearSpecificFilter = (filterType) => {
+    console.log(`Limpando filtro: ${filterType}`);
+    
+    let newFilters = { ...filters };
+    newFilters[filterType] = 'Todos';
+    
+    console.log('Novos filtros após limpeza:', newFilters);
+    setFilters(newFilters);
+    fetchData(newFilters);
   };
 
   // Debug: mostrar dados atuais
@@ -124,7 +166,12 @@ const Participacoes = () => {
             <h2 className="text-xl font-semibold text-gray-700 mb-4 text-center">
               Participação por Distrito
             </h2>
-            <DistritoChart data={data.distrito} loading={loading}/>
+            <DistritoChart 
+              data={data.distrito} 
+              loading={loading}
+              onItemClick={handleItemClick}
+              onClearFilter={handleClearSpecificFilter}
+            />
           </div>
         </div>
 
@@ -132,7 +179,12 @@ const Participacoes = () => {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Tabela de dados - 2/3 da largura */}
           <div className="lg:col-span-2">
-            <TabelaParticipacoes data={data.tabela} loading={loading} />
+            <TabelaParticipacoes 
+              data={data.tabela} 
+              loading={loading}
+              onItemClick={handleItemClick}
+              onClearFilter={handleClearSpecificFilter}
+            />
           </div>
 
           {/* Gráfico total (SEMED) - 1/3 da largura */}
@@ -142,7 +194,12 @@ const Participacoes = () => {
                 SEMED
               </h3>
               <div className="flex-1">
-                <TotalChart data={data.total} loading={loading} />
+                <TotalChart 
+                  data={data.total} 
+                  loading={loading} 
+                  onItemClick={handleItemClick}
+                  onClearFilter={handleClearSpecificFilter}
+                />
               </div>
             </div>
           </div>

@@ -21,7 +21,7 @@ ChartJS.register(
   ChartDataLabels
 );
 
-const GraficoDistrito = ({ data, loading }) => {
+const GraficoDistrito = ({ data, loading, onItemClick, onClearFilter }) => {
   if (loading) {
     return (
       <div className="h-64 bg-gray-100 rounded-lg flex items-center justify-center">
@@ -37,6 +37,19 @@ const GraficoDistrito = ({ data, loading }) => {
       </div>
     );
   }
+
+  // Função para lidar com clique no gráfico
+  const handleChartClick = (event, elements) => {
+    if (elements && elements.length > 0) {
+      const element = elements[0];
+      const distrito = data[element.index]['desempenho_notas.distrito'];
+      
+      if (distrito) {
+        console.log(`Clicou no distrito: ${distrito}`);
+        onItemClick('distrito', distrito);
+      }
+    }
+  };
 
   // Processar dados para o formato do Chart.js
   const chartData = {
@@ -68,6 +81,7 @@ const GraficoDistrito = ({ data, loading }) => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    onClick: handleChartClick,
     layout: {
       padding: {
         top: 20,
@@ -142,7 +156,7 @@ const GraficoDistrito = ({ data, loading }) => {
       {/* Legenda personalizada */}
       <div className="flex justify-center space-x-6 mt-4">
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-teal-600 rounded"></div>
+          <div className="w-4 h-4 bg-cyan-600 rounded"></div>
           <span className="text-sm text-gray-600">% Acertos</span>
         </div>
         <div className="flex items-center space-x-2">

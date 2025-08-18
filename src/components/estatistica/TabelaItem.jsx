@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const TabelaItem = ({ data, loading }) => {
+const TabelaItem = ({ data, loading, onItemClick, onClearFilter }) => {
     // Estado para controlar a ordenação
     const [sortConfig, setSortConfig] = useState({
         key: null,
@@ -55,6 +55,20 @@ const TabelaItem = ({ data, loading }) => {
         setSortConfig({ key, direction });
     };
 
+    // Função para lidar com clique na linha da tabela
+    const handleRowClick = (item) => {
+        if (item) {
+            console.log('Clicou na linha da tabela:', item);
+            // Aqui você pode implementar lógica específica para filtrar
+            // Por exemplo, filtrar por questão, fase, ou outro campo relevante
+            if (item['estatistica_saeb.questao']) {
+                onItemClick('questao', item['estatistica_saeb.questao']);
+            } else if (item['estatistica_saeb.fase']) {
+                onItemClick('fase', item['estatistica_saeb.fase']);
+            }
+        }
+    };
+
     // Dados ordenados
     const sortedData = sortData(data, sortConfig.key, sortConfig.direction);
 
@@ -85,6 +99,7 @@ const TabelaItem = ({ data, loading }) => {
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
             <div className="bg-cyan-600 px-6 py-3">
                 <h3 className="text-lg font-semibold text-white">Dados Detalhados</h3>
+                <p className="text-cyan-100 text-sm mt-1">💡 Clique em uma linha para filtrar por questão/fase</p>
             </div>
 
             <div className="overflow-auto max-h-96">
@@ -367,7 +382,12 @@ const TabelaItem = ({ data, loading }) => {
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                         {sortedData.map((item, index) => (
-                            <tr key={index} className={`hover:bg-gray-50 h-10 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                            <tr 
+                                key={index} 
+                                className={`hover:bg-gray-50 h-10 cursor-pointer transition-colors duration-150 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`} 
+                                onClick={() => handleRowClick(item)}
+                                title="Clique para filtrar por esta questão/fase"
+                            >
                                 <td className="px-3 py-2 text-xs font-medium text-gray-900 w-20">
                                     {item['estatistica_saeb.fase'] || '--'}
                                 </td>

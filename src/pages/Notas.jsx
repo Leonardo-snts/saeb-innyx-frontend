@@ -15,6 +15,7 @@ const Notas = () => {
   const [error, setError] = useState(null);
   const [filters, setFilters] = useState({
     simulado: 'Todos',
+    distrito: 'Todos',
     escola: 'Todos',
     fase: 'Todos',
     turma: 'Todos'
@@ -26,6 +27,44 @@ const Notas = () => {
 
   const handleFilterChange = (key, value) => {
     const newFilters = { ...filters, [key]: value };
+    setFilters(newFilters);
+    fetchData(newFilters);
+  };
+
+  // Função para aplicar filtro ao clicar em um item
+  const handleItemClick = (filterType, value) => {
+    
+    let newFilters = { ...filters };
+    
+    // Aplicar o filtro específico
+    switch (filterType) {
+      case 'distrito':
+        newFilters.distrito = value;
+        break;
+      case 'escola':
+        newFilters.escola = value;
+        break;
+      case 'fase':
+        newFilters.fase = value;
+        break;
+      case 'turma':
+        newFilters.turma = value;
+        break;
+      default:
+        break;
+    }
+    
+    setFilters(newFilters);
+    fetchData(newFilters);
+  };
+
+  // Função para limpar filtro específico
+  const handleClearSpecificFilter = (filterType) => {
+    
+    let newFilters = { ...filters };
+    newFilters[filterType] = 'Todos';
+    
+    console.log('Novos filtros após limpeza:', newFilters);
     setFilters(newFilters);
     fetchData(newFilters);
   };
@@ -62,6 +101,7 @@ const Notas = () => {
   const handleClearFilters = () => {
     const clearedFilters = {
       simulado: 'Todos',
+      distrito: 'Todos',
       escola: 'Todos',
       fase: 'Todos',
       turma: 'Todos'
@@ -92,8 +132,18 @@ const Notas = () => {
 
       {/* KPIs Score Cards */}
       <div className="grid lg:grid-cols-2 gap-8 mb-8 p-8">
-        <ScoreCardAcertos data={data.acertos} loading={loading} />
-        <ScoreCardErros data={data.erros} loading={loading} />
+        <ScoreCardAcertos 
+          data={data.acertos} 
+          loading={loading}
+          onItemClick={handleItemClick}
+          onClearFilter={handleClearSpecificFilter}
+        />
+        <ScoreCardErros 
+          data={data.erros} 
+          loading={loading}
+          onItemClick={handleItemClick}
+          onClearFilter={handleClearSpecificFilter}
+        />
       </div>
 
       {/* Gráfico por distrito */}
@@ -101,7 +151,12 @@ const Notas = () => {
         <h3 className="text-lg font-semibold text-gray-700 mb-4 text-center">
           Desempenho dos Estudantes
         </h3>
-        <GraficoDistrito data={data.distrito} loading={loading} />
+        <GraficoDistrito 
+          data={data.distrito} 
+          loading={loading}
+          onItemClick={handleItemClick}
+          onClearFilter={handleClearSpecificFilter}
+        />
       </div>
     </div>
   );
