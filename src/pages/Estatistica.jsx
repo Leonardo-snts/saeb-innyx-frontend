@@ -17,7 +17,22 @@ const Estatistica = () => {
     escola: 'Todos',
     ano: 'Todos',
     turma: 'Todos',
-    questao: 'Todos'
+    questao: 'Todos',
+    fase: 'Todos',
+    gabarito: 'Todos',
+    eixo_cem: 'Todos',
+    ch_cem: 'Todos',
+    habilidade_cem: 'Todos',
+    ch_saeb: 'Todos',
+    habilidade_saeb: 'Todos',
+    cc: 'Todos',
+    porcentagem_acertos: 'Todos',
+    porcentagem_A: 'Todos',
+    porcentagem_B: 'Todos',
+    porcentagem_C: 'Todos',
+    porcentagem_D: 'Todos',
+    porcentagem_embranco: 'Todos',
+    porcentagem_rasura: 'Todos'
   });
 
   useEffect(() => {
@@ -32,7 +47,8 @@ const Estatistica = () => {
 
   // Função para aplicar filtro ao clicar em um item
   const handleItemClick = (filterType, value) => {
-    console.log(`Aplicando filtro: ${filterType} = ${value}`);
+    console.log(`🔍 Aplicando filtro: ${filterType} = ${value}`);
+    console.log('📊 Filtros atuais:', filters);
     
     let newFilters = { ...filters };
     
@@ -53,11 +69,60 @@ const Estatistica = () => {
       case 'turma':
         newFilters.turma = value;
         break;
+      case 'questao':
+        newFilters.questao = value;
+        break;
+      case 'fase':
+        newFilters.fase = value;
+        break;
+      case 'gabarito':
+        newFilters.gabarito = value;
+        break;
+      case 'eixo_cem':
+        newFilters.eixo_cem = value;
+        break;
+      case 'ch_cem':
+        newFilters.ch_cem = value;
+        break;
+      case 'habilidade_cem':
+        newFilters.habilidade_cem = value;
+        break;
+      case 'ch_saeb':
+        newFilters.ch_saeb = value;
+        break;
+      case 'habilidade_saeb':
+        newFilters.habilidade_saeb = value;
+        break;
+      case 'cc':
+        newFilters.cc = value;
+        break;
+      case 'porcentagem_acertos':
+        newFilters.porcentagem_acertos = value;
+        break;
+      case 'porcentagem_A':
+        newFilters.porcentagem_A = value;
+        break;
+      case 'porcentagem_B':
+        newFilters.porcentagem_B = value;
+        break;
+      case 'porcentagem_C':
+        newFilters.porcentagem_C = value;
+        break;
+      case 'porcentagem_D':
+        newFilters.porcentagem_D = value;
+        break;
+      case 'porcentagem_embranco':
+        newFilters.porcentagem_embranco = value;
+        break;
+      case 'porcentagem_rasura':
+        newFilters.porcentagem_rasura = value;
+        break;
       default:
+        console.log('❓ Tipo de filtro não reconhecido:', filterType);
         break;
     }
     
-    console.log('Novos filtros após clique:', newFilters);
+    console.log('🔄 Novos filtros após clique:', newFilters);
     setFilters(newFilters);
     fetchData(newFilters);
   };
@@ -75,32 +140,44 @@ const Estatistica = () => {
   };
 
   const buildLookerFilters = (currentFilters) => {
+    console.log('🔍 buildLookerFilters recebeu:', currentFilters);
+    
     const lookerFilters = {};
     for (const key in currentFilters) {
       if (currentFilters[key] && currentFilters[key] !== 'Todos') {
         // Usar o prefixo correto para os looks de estatística
         lookerFilters[`estatistica_saeb.${key}`] = currentFilters[key];
+        console.log(`✅ Adicionando filtro: estatistica_saeb.${key} = ${currentFilters[key]}`);
+      } else {
+        console.log(`⏭️ Pulando filtro ${key}: valor = ${currentFilters[key]}`);
       }
     }
-    console.log('Filtros para Looker:', lookerFilters);
+    
+    console.log('🔧 Filtros finais para Looker:', lookerFilters);
     return lookerFilters;
   };
 
   const fetchData = async (newFilters) => {
     try {
+      console.log('🚀 Iniciando fetchData com filtros:', newFilters);
       setLoading(true);
       setError(null);
 
       const lookerFilters = buildLookerFilters(newFilters);
-      console.log('Filtros para Looker:', lookerFilters);
+      console.log('🔧 Filtros convertidos para Looker:', lookerFilters);
 
+      console.log('📡 Chamando getAllEstatisticaData...');
       const result = await getAllEstatisticaData(lookerFilters);
+      console.log('📊 Resultado recebido da API:', result);
+      
       setData(result);
+      console.log('✅ Dados atualizados no estado:', result);
     } catch (err) {
-      console.error('Erro ao buscar dados:', err);
+      console.error('❌ Erro ao buscar dados:', err);
       setError('Erro ao carregar dados da estatística');
     } finally {
       setLoading(false);
+      console.log('🏁 Loading finalizado');
     }
   };
 
@@ -111,7 +188,22 @@ const Estatistica = () => {
       escola: 'Todos',
       ano: 'Todos',
       turma: 'Todos',
-      questao: 'Todos'
+      questao: 'Todos',
+      fase: 'Todos',
+      gabarito: 'Todos',
+      eixo_cem: 'Todos',
+      ch_cem: 'Todos',
+      habilidade_cem: 'Todos',
+      ch_saeb: 'Todos',
+      habilidade_saeb: 'Todos',
+      cc: 'Todos',
+      porcentagem_acertos: 'Todos',
+      porcentagem_A: 'Todos',
+      porcentagem_B: 'Todos',
+      porcentagem_C: 'Todos',
+      porcentagem_D: 'Todos',
+      porcentagem_embranco: 'Todos',
+      porcentagem_rasura: 'Todos'
     };
     setFilters(clearedFilters);
     fetchData(clearedFilters);
@@ -137,12 +229,69 @@ const Estatistica = () => {
         onClearFilters={handleClearFilters}
       />
 
+      {/* Indicador de filtros ativos */}
+      <div className="mx-8 mt-4 mb-2">
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+          <h4 className="text-sm font-medium text-blue-800 mb-2">
+            🔍 Filtros Ativos:
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            {Object.entries(filters).map(([key, value]) => {
+              if (value !== 'Todos') {
+                return (
+                  <div key={key} className="flex items-center space-x-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs">
+                    <span className="font-medium">{key}:</span>
+                    <span>{value}</span>
+                    <button
+                      onClick={() => handleClearSpecificFilter(key)}
+                      className="text-blue-600 hover:text-blue-800 font-bold"
+                      title={`Remover filtro de ${key}`}
+                    >
+                      ×
+                    </button>
+                  </div>
+                );
+              }
+              return null;
+            })}
+            {Object.values(filters).every(value => value === 'Todos') && (
+              <span className="text-blue-600 text-sm italic">Nenhum filtro ativo</span>
+            )}
+          </div>
+          
+          {/* Botão de teste para verificar filtros */}
+          <div className="mt-3 pt-3 border-t border-blue-200">
+            <button
+              onClick={() => {
+                console.log('🧪 Teste: Aplicando filtro de questão = 1');
+                handleItemClick('questao', '1');
+              }}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs"
+            >
+              🧪 Testar Filtro (Questão = 1)
+            </button>
+            <button
+              onClick={() => {
+                console.log('🧪 Teste: Aplicando filtro de fase = 1');
+                handleItemClick('fase', '1');
+              }}
+              className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs ml-2"
+            >
+              🧪 Testar Filtro (Fase = 1)
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Gráfico de questões */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mx-8 mb-8">
         <div className="text-center mb-4">
           <h2 className="text-xl font-semibold text-gray-700 mb-2">
             % Acertos por Questão
           </h2>
+          <p className="text-sm text-gray-500">
+            🎯 Clique nas barras para filtrar por questão específica
+          </p>
         </div>
         <GraficoColuna 
           data={data.graficoColuna} 

@@ -22,7 +22,10 @@ ChartJS.register(
 );
 
 const GraficoColuna = ({ data, loading, onItemClick, onClearFilter }) => {
+  console.log('🎨 GraficoColuna renderizando com:', { data, loading, onItemClick, onClearFilter });
+
   if (loading) {
+    console.log('⏳ GraficoColuna: mostrando loading');
     return (
       <div className="h-64 bg-gray-100 rounded-lg flex items-center justify-center">
         <p className="text-gray-500">Carregando dados...</p>
@@ -31,12 +34,15 @@ const GraficoColuna = ({ data, loading, onItemClick, onClearFilter }) => {
   }
 
   if (!data || !data.length) {
+    console.log('❌ GraficoColuna: dados vazios ou indefinidos');
     return (
       <div className="h-64 bg-gray-100 rounded-lg flex items-center justify-center">
         <p className="text-gray-500">Nenhum dado disponível</p>
       </div>
     );
   }
+
+  console.log('✅ GraficoColuna: dados recebidos:', data);
 
   // Função para lidar com clique no gráfico
   const handleChartClick = (event, elements) => {
@@ -45,8 +51,25 @@ const GraficoColuna = ({ data, loading, onItemClick, onClearFilter }) => {
       const questao = data[element.index]['estatistica_saeb.questao'];
       
       if (questao) {
-        console.log(`Clicou na questão: ${questao}`);
+        console.log(`🎯 Clicou na questão: ${questao}`);
+        console.log('📊 Dados da questão clicada:', data[element.index]);
+        
+        // Aplicar filtro por questão
         onItemClick('questao', questao);
+        
+        // Também podemos aplicar filtros adicionais baseados nos dados da questão
+        const itemData = data[element.index];
+        
+        // Se houver fase, aplicar filtro de fase
+        if (itemData['estatistica_saeb.fase']) {
+          console.log(`📚 Aplicando filtro de fase: ${itemData['estatistica_saeb.fase']}`);
+          // Aqui você pode implementar filtros múltiplos se necessário
+        }
+        
+        // Se houver eixo CEM, aplicar filtro de eixo
+        if (itemData['estatistica_saeb.eixo_cem']) {
+          console.log(`📖 Aplicando filtro de eixo CEM: ${itemData['estatistica_saeb.eixo_cem']}`);
+        }
       }
     }
   };

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 const TabelaItem = ({ data, loading, onItemClick, onClearFilter }) => {
+    console.log('🎨 TabelaItem renderizando com:', { data, loading, onItemClick, onClearFilter });
+
     // Estado para controlar a ordenação
     const [sortConfig, setSortConfig] = useState({
         key: null,
@@ -58,13 +60,87 @@ const TabelaItem = ({ data, loading, onItemClick, onClearFilter }) => {
     // Função para lidar com clique na linha da tabela
     const handleRowClick = (item) => {
         if (item) {
-            console.log('Clicou na linha da tabela:', item);
-            // Aqui você pode implementar lógica específica para filtrar
-            // Por exemplo, filtrar por questão, fase, ou outro campo relevante
+            console.log('🎯 Clicou na linha da tabela:', item);
+            
+            // Aplicar filtros baseados nos dados da linha
             if (item['estatistica_saeb.questao']) {
+                console.log(`📝 Aplicando filtro de questão: ${item['estatistica_saeb.questao']}`);
                 onItemClick('questao', item['estatistica_saeb.questao']);
-            } else if (item['estatistica_saeb.fase']) {
+            }
+            
+            if (item['estatistica_saeb.fase']) {
+                console.log(`📚 Aplicando filtro de fase: ${item['estatistica_saeb.fase']}`);
                 onItemClick('fase', item['estatistica_saeb.fase']);
+            }
+            
+            if (item['estatistica_saeb.gabarito']) {
+                console.log(`✅ Aplicando filtro de gabarito: ${item['estatistica_saeb.gabarito']}`);
+                onItemClick('gabarito', item['estatistica_saeb.gabarito']);
+            }
+            
+            if (item['estatistica_saeb.eixo_cem']) {
+                console.log(`📖 Aplicando filtro de eixo CEM: ${item['estatistica_saeb.eixo_cem']}`);
+                onItemClick('eixo_cem', item['estatistica_saeb.eixo_cem']);
+            }
+            
+            if (item['estatistica_saeb.ch_cem']) {
+                console.log(`🔢 Aplicando filtro de CH CEM: ${item['estatistica_saeb.ch_cem']}`);
+                onItemClick('ch_cem', item['estatistica_saeb.ch_cem']);
+            }
+            
+            if (item['estatistica_saeb.habilidade_cem']) {
+                console.log(`🧠 Aplicando filtro de habilidade CEM: ${item['estatistica_saeb.habilidade_cem']}`);
+                onItemClick('habilidade_cem', item['estatistica_saeb.habilidade_cem']);
+            }
+            
+            if (item['estatistica_saeb.ch_saeb']) {
+                console.log(`📊 Aplicando filtro de CH SAEB: ${item['estatistica_saeb.ch_saeb']}`);
+                onItemClick('ch_saeb', item['estatistica_saeb.ch_saeb']);
+            }
+            
+            if (item['estatistica_saeb.habilidade_saeb']) {
+                console.log(`🎓 Aplicando filtro de habilidade SAEB: ${item['estatistica_saeb.habilidade_saeb']}`);
+                onItemClick('habilidade_saeb', item['estatistica_saeb.habilidade_saeb']);
+            }
+            
+            if (item['estatistica_saeb.cc']) {
+                console.log(`📋 Aplicando filtro de CC: ${item['estatistica_saeb.cc']}`);
+                onItemClick('cc', item['estatistica_saeb.cc']);
+            }
+            
+            if (item['estatistica_saeb.porcentagem_acertos']) {
+                console.log(`🎯 Aplicando filtro de % acertos: ${item['estatistica_saeb.porcentagem_acertos']}`);
+                onItemClick('porcentagem_acertos', item['estatistica_saeb.porcentagem_acertos']);
+            }
+            
+            if (item['estatistica_saeb.porcentagem_A']) {
+                console.log(`🅰️ Aplicando filtro de % A: ${item['estatistica_saeb.porcentagem_A']}`);
+                onItemClick('porcentagem_A', item['estatistica_saeb.porcentagem_A']);
+            }
+            
+            if (item['estatistica_saeb.porcentagem_B']) {
+                console.log(`🅱️ Aplicando filtro de % B: ${item['estatistica_saeb.porcentagem_B']}`);
+                onItemClick('porcentagem_B', item['estatistica_saeb.porcentagem_B']);
+            }
+            
+            if (item['estatistica_saeb.porcentagem_C']) {
+                console.log(`©️ Aplicando filtro de % C: ${item['estatistica_saeb.porcentagem_C']}`);
+                onItemClick('porcentagem_C', item['estatistica_saeb.porcentagem_C']);
+            }
+            
+            if (item['estatistica_saeb.porcentagem_D']) {
+                console.log(`🇩 Aplicando filtro de % D: ${item['estatistica_saeb.porcentagem_D']}`);
+                onItemClick('porcentagem_D', item['estatistica_saeb.porcentagem_D']);
+            }
+            
+            if (item['estatistica_saeb.porcentagem_embranco']) {
+                console.log(`⬜ Aplicando filtro de % em branco: ${item['estatistica_saeb.porcentagem_embranco']}`);
+                onItemClick('porcentagem_embranco', item['estatistica_saeb.porcentagem_embranco']);
+            }
+            
+            if (item['estatistica_saeb.porcentagem_rasura']) {
+                console.log(`✏️ Aplicando filtro de % rasura: ${item['estatistica_saeb.porcentagem_rasura']}`);
+                onItemClick('porcentagem_rasura', item['estatistica_saeb.porcentagem_rasura']);
             }
         }
     };
@@ -99,7 +175,7 @@ const TabelaItem = ({ data, loading, onItemClick, onClearFilter }) => {
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
             <div className="bg-cyan-600 px-6 py-3">
                 <h3 className="text-lg font-semibold text-white">Dados Detalhados</h3>
-                <p className="text-cyan-100 text-sm mt-1">💡 Clique em uma linha para filtrar por questão/fase</p>
+                <p className="text-cyan-100 text-sm mt-1">💡 Clique em uma linha para aplicar filtros detalhados (questão, fase, gabarito, eixo, etc.)</p>
             </div>
 
             <div className="overflow-auto max-h-96">

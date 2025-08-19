@@ -220,10 +220,14 @@ export async function getGraficoColuna(filters = {}) {
       lookId: 419,
       ...filters,
     };
+    console.log('📊 getGraficoColuna - params:', params);
+    
     const response = await axios.get(`${BASE_URL}/processes`, { params });
+    console.log('📊 getGraficoColuna - response:', response.data);
+    
     return response.data;
   } catch (error) {
-    console.error('Erro ao buscar dados do gráfico coluna:', error);
+    console.error('❌ Erro ao buscar dados do gráfico coluna:', error);
     throw error;
   }
 }
@@ -234,27 +238,39 @@ export async function getTabelaItem(filters = {}) {
       lookId: 420,
       ...filters,
     };
+    console.log('📋 getTabelaItem - params:', params);
+    
     const response = await axios.get(`${BASE_URL}/processes`, { params });
+    console.log('📋 getTabelaItem - response:', response.data);
+    
     return response.data;
   } catch (error) {
-    console.error('Erro ao buscar dados da tabela item:', error);
+    console.error('❌ Erro ao buscar dados da tabela item:', error);
     throw error;
   }
 }
 
 export async function getAllEstatisticaData(filters = {}) {
   try {
+    console.log('📡 getAllEstatisticaData recebeu filtros:', filters);
+    
     const [graficoColuna, tabelaItem] = await Promise.all([
       getGraficoColuna(filters),
       getTabelaItem(filters)
     ]);
 
-    return {
+    console.log('📊 Dados do gráfico coluna:', graficoColuna);
+    console.log('📋 Dados da tabela item:', tabelaItem);
+
+    const result = {
       graficoColuna: graficoColuna,
       tabelaItem: tabelaItem
     };
+
+    console.log('✅ Resultado final getAllEstatisticaData:', result);
+    return result;
   } catch (error) {
-    console.error('Erro ao buscar todos os dados de estatística:', error);
+    console.error('❌ Erro ao buscar todos os dados de estatística:', error);
     throw error;
   }
 }
