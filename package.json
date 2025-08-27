@@ -1,32 +1,31 @@
 {
-  "name": "saeb-innyx",
+  "name": "saeb-innyx-fullstack",
+  "version": "1.0.0",
+  "description": "Projeto fullstack SAEB Innyx com frontend React e backend Node.js",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "axios": "^1.10.0",
-    "chart.js": "^4.5.0",
-    "chartjs-plugin-datalabels": "^2.2.0",
-    "react": "^18.3.1",
-    "react-chartjs-2": "^5.3.0",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^7.7.0"
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm run preview",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "clean": "rm -rf node_modules backend/node_modules frontend/node_modules",
+    "clean:install": "npm run clean && npm run install:all"
   },
   "devDependencies": {
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.6.0",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17",
-    "vite": "^7.0.4"
+    "concurrently": "^8.2.2"
   },
   "engines": {
-    "node": ">=22"
-  }
+    "node": ">=22",
+    "npm": ">=10"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
 }

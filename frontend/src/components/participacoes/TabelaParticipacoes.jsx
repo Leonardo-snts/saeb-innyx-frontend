@@ -5,8 +5,8 @@ const TabelaParticipacoes = ({ data, loading, onItemClick, onClearFilter }) => {
 
   // Estado para controlar a ordenação
   const [sortConfig, setSortConfig] = useState({
-    key: null,
-    direction: 'asc'
+    key: 'participacoes_saeb.distrito',
+    direction: 'desc'
   });
 
   // Função para ordenar os dados
@@ -106,37 +106,35 @@ const TabelaParticipacoes = ({ data, loading, onItemClick, onClearFilter }) => {
   console.log('TabelaParticipacoes: totais calculados:', totais);
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-      <div className="bg-cyan-600 px-6 py-3">
-        <h3 className="text-lg font-semibold text-white">Dados Detalhados</h3>
-      </div>
-      
+    <div className="bg-white overflow-hidden">
       <div className="overflow-x-auto flex-1">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
               <th 
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+                className="bg-[#033f41] px-3 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none"
                 onClick={() => handleSort('participacoes_saeb.distrito')}
               >
-                <div className="flex items-center space-x-1">
+                <div className="flex items-center justify-center space-x-1">
                   <span>Distrito</span>
                   {sortConfig.key === 'participacoes_saeb.distrito' && (
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                      {sortConfig.direction === 'asc' ? (
-                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                      ) : (
+                      {sortConfig.direction === 'desc' ?  (
+                        // Ícone para ordem decrescente (seta para baixo)
                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                      ) : (
+                        // Ícone para ordem crescente (seta para cima)
+                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
                       )}
                     </svg>
                   )}
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+                className="bg-[#033f41] px-8 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none"
                 onClick={() => handleSort('participacoes_saeb.sum_presentes')}
               >
-                <div className="flex items-center justify-end space-x-1">
+                <div className="flex items-center justify-center space-x-1">
                   <span>Presentes</span>
                   {sortConfig.key === 'participacoes_saeb.sum_presentes' && (
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -150,10 +148,10 @@ const TabelaParticipacoes = ({ data, loading, onItemClick, onClearFilter }) => {
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+                className="bg-[#033f41] px-6 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none"
                 onClick={() => handleSort('participacoes_saeb.sum_ausentes')}
               >
-                <div className="flex items-center justify-end space-x-1">
+                <div className="flex items-center justify-center space-x-1">
                   <span>Ausentes</span>
                   {sortConfig.key === 'participacoes_saeb.sum_ausentes' && (
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -167,10 +165,10 @@ const TabelaParticipacoes = ({ data, loading, onItemClick, onClearFilter }) => {
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+                className="bg-[#033f41] px-6 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none"
                 onClick={() => handleSort('participacoes_saeb.sum_deficientes')}
               >
-                <div className="flex items-center justify-end space-x-1">
+                <div className="flex items-center justify-center space-x-1">
                   <span>Deficientes</span>
                   {sortConfig.key === 'participacoes_saeb.sum_deficientes' && (
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -184,10 +182,10 @@ const TabelaParticipacoes = ({ data, loading, onItemClick, onClearFilter }) => {
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+                className="bg-[#033f41] px-6 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none"
                 onClick={() => handleSort('participacoes_saeb.sum_transferidos')}
               >
-                <div className="flex items-center justify-end space-x-1">
+                <div className="flex items-center justify-center space-x-1">
                   <span>Transferidos</span>
                   {sortConfig.key === 'participacoes_saeb.sum_transferidos' && (
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -210,39 +208,39 @@ const TabelaParticipacoes = ({ data, loading, onItemClick, onClearFilter }) => {
                 onClick={() => handleRowClick(item['participacoes_saeb.distrito'])}
                 title="Clique para filtrar por este distrito"
               >
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center">
                   {item['participacoes_saeb.distrito'] || 'Distrito'}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
                   {formatNumber(item['participacoes_saeb.sum_presentes'])}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
                   {formatNumber(item['participacoes_saeb.sum_ausentes'])}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
                   {formatNumber(item['participacoes_saeb.sum_deficientes'])}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
                   {formatNumber(item['participacoes_saeb.sum_transferidos'])}
                 </td>
               </tr>
             ))}
             
             {/* Linha de totais */}
-            <tr className="bg-gray-50 font-bold">
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
+            <tr className="bg-[#eff0f0] font-bold">
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 text-center">
                 Total geral
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 text-right">
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 text-center">
                 {formatNumber(totais.presentes)}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 text-right">
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 text-center">
                 {formatNumber(totais.ausentes)}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 text-right">
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 text-center">
                 {formatNumber(totais.deficientes)}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-right">
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 text-center">
                 {formatNumber(totais.transferidos)}
               </td>
             </tr>

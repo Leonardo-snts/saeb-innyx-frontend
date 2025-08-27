@@ -60,8 +60,8 @@ const TotalChart = ({ data, loading, onItemClick, onClearFilter }) => {
       {
         label: '% Presentes',
         data: [parseFloat(data[0]?.['participacoes_saeb.porcet_presentes'] || 0) * 100],
-        backgroundColor: '#0891b2',
-        borderColor: '#0891b2',
+        backgroundColor: '#18adb6',
+        borderColor: '#18adb6',
         borderWidth: 1,
       },
       {
@@ -128,6 +128,7 @@ const TotalChart = ({ data, loading, onItemClick, onClearFilter }) => {
       y: {
         beginAtZero: true,
         max: 100,
+        display: false,
         grid: {
           color: 'rgba(0, 0, 0, 0.1)',
         },
@@ -155,11 +156,11 @@ const TotalChart = ({ data, loading, onItemClick, onClearFilter }) => {
       {/* Legenda personalizada */}
       <div className="flex justify-center space-x-6 mt-4">
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-cyan-600 rounded"></div>
+          <div className="w-4 h-4 bg-[#18adb6] px-4"></div>
           <span className="text-sm text-gray-600">% Presentes</span>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-orange-500 rounded"></div>
+          <div className="w-4 h-4 bg-orange-500 px-4"></div>
           <span className="text-sm text-gray-600">% Ausentes</span>
         </div>
       </div>

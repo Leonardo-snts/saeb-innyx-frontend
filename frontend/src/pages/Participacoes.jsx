@@ -162,7 +162,7 @@ const Participacoes = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Seção de gráficos por distrito */}
         <div className="mb-8">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 h-full">
+          <div className="p-6 h-full">
             <h2 className="text-xl font-semibold text-gray-700 mb-4 text-center">
               Participação por Distrito
             </h2>
@@ -189,7 +189,7 @@ const Participacoes = () => {
 
           {/* Gráfico total (SEMED) - 1/3 da largura */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 h-full">
+            <div className="p-6 h-full">
               <h3 className="text-lg font-semibold text-gray-700 mb-4 text-center">
                 SEMED
               </h3>

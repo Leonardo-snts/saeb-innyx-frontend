@@ -64,8 +64,8 @@ const DistritoChart = ({ data, loading, onItemClick, onClearFilter }) => {
           console.log(`Presentes para ${item['participacoes_saeb.distrito']}: ${value}%`);
           return value;
         }),
-        backgroundColor: '#0891b2',
-        borderColor: '#0891b2',
+        backgroundColor: '#18adb6',
+        borderColor: '#18adb6',
         borderWidth: 1,
       },
       {
@@ -133,6 +133,7 @@ const DistritoChart = ({ data, loading, onItemClick, onClearFilter }) => {
       y: {
         beginAtZero: true,
         max: 100,
+        display: false, // Não exibe o eixo Y (nem os valores de porcentagem)
         grid: {
           color: 'rgba(0, 0, 0, 0.1)',
         },
@@ -160,11 +161,11 @@ const DistritoChart = ({ data, loading, onItemClick, onClearFilter }) => {
       {/* Legenda personalizada */}
       <div className="flex justify-center space-x-6 mt-4">
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-cyan-600 rounded"></div>
+          <div className="w-4 h-4 bg-[#18adb6] px-4"></div>
           <span className="text-sm text-gray-600">% Presentes</span>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-orange-500 rounded"></div>
+          <div className="w-4 h-4 bg-orange-500 px-4"></div>
           <span className="text-sm text-gray-600">% Ausentes</span>
         </div>
       </div>
