@@ -134,7 +134,7 @@ const Medias = () => {
       />
 
       {/* KPIs Score Cards */}
-      <div className="grid lg:grid-cols-2 gap-8 mb-8 p-8">
+      <div className="flex justify-center gap-4 mb-4 p-4">
         <MediaLP 
           data={data.mediaLP} 
           loading={loading}
@@ -150,7 +150,7 @@ const Medias = () => {
       </div>
 
       {/* Gráfico por distrito */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mx-8 mb-8">
+      <div className="mx-8 mb-8">
         <h3 className="text-lg font-semibold text-gray-700 mb-4 text-center">
           Desempenho dos Estudantes
         </h3>

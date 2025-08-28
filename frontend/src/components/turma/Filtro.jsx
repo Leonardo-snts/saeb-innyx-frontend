@@ -11,10 +11,10 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
   useEffect(() => {
     async function fetchSimulados() {
       try {
-        const response = await getProcesses({ lookId: 436 }); // Look para simulados
+        const response = await getProcesses({ lookId: 499 }); // Look para simulados
         const unique = [
           ...new Set(
-            response.map((item) => item['estatistica_saeb.simulado']).filter(Boolean)
+            response.map((item) => item['relatorio_turma_saeb.Simulados']).filter(Boolean)
           ),
         ];
         setSimulados(unique);
@@ -24,25 +24,25 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
     }
 
     async function fetchDistritos() {
-      try {
-        const response = await getProcesses({ lookId: 437 }); // Look para distritos
-        const unique = [
-          ...new Set(
-            response.map((item) => item['estatistica_saeb.distrito']).filter(Boolean)
-          ),
-        ];
-        setDistritos(unique);
-      } catch (err) {
-        console.error('Erro ao buscar distritos:', err);
+        try {
+          const response = await getProcesses({ lookId: 500 }); // Look para distritos
+          const unique = [
+            ...new Set(
+              response.map((item) => item['relatorio_turma_saeb.Distrito']).filter(Boolean)
+            ),
+          ];
+          setDistritos(unique);
+        } catch (err) {
+          console.error('Erro ao buscar distritos:', err);
+        }
       }
-    }
 
     async function fetchEscolas() {
       try {
-        const response = await getProcesses({ lookId: 438 }); // Look para escolas
+        const response = await getProcesses({ lookId: 501 }); // Look para escolas
         const unique = [
           ...new Set(
-            response.map((item) => item['estatistica_saeb.escola']).filter(Boolean)
+            response.map((item) => item['relatorio_turma_saeb.Escola']).filter(Boolean)
           ),
         ];
         setEscolas(unique);
@@ -53,24 +53,24 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
 
     async function fetchFases() {
       try {
-        const response = await getProcesses({ lookId: 439 }); // Look para fases
+        const response = await getProcesses({ lookId: 502 }); // Look para fases
         const unique = [
           ...new Set(
-            response.map((item) => item['estatistica_saeb.fase']).filter(Boolean)
+            response.map((item) => item['relatorio_turma_saeb.Ano']).filter(Boolean)
           ),
         ];
         setFases(unique);
       } catch (err) {
         console.error('Erro ao buscar fases:', err);
       }
-    } 
+    }
 
     async function fetchTurmas() {
       try {
-        const response = await getProcesses({ lookId: 440 }); // Look para turmas
+        const response = await getProcesses({ lookId: 503 }); // Look para turmas
         const unique = [
           ...new Set(
-            response.map((item) => item['estatistica_saeb.turma']).filter(Boolean)
+            response.map((item) => item['relatorio_turma_saeb.Turma']).filter(Boolean)
           ),
         ];
         setTurmas(unique);
@@ -79,8 +79,8 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
       }
     }
 
-    fetchDistritos();
     fetchSimulados();
+    fetchDistritos();
     fetchEscolas();
     fetchFases();
     fetchTurmas();
@@ -92,13 +92,13 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
 
   return (
     <div className="bg-[#18adb6] px-8 py-5 rounded-tr-[50px] rounded-br-[50px]">
-      <div className="grid grid-cols-[auto_1fr_auto] items-end gap-5">
+      <div className="grid grid-cols-[auto_1fr_auto] items-end gap-4">
         {/* Título (esquerda) */}
         <div className="flex items-center h-full text-white text-center justify-self-center" style={{ minHeight: '64px' }}>
-          <h1 className="text-2xl font-bold">Estatística Item</h1>
+          <h1 className="text-2xl font-bold">Relatório de Turma</h1>
         </div>
 
-        {/* Filtros */}
+        {/* Filtros (centralizados) */}
         <div className="justify-self-center flex items-end space-x-4">
           {/* Filtro Simulado */}
           <div className="flex flex-col">

@@ -169,7 +169,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         <div className="justify-self-end -mr-4">
           <button
             onClick={onClearFilters}
-            className="h-16 px-3 py-2 bg-[#0d5c61] text-white font-medium rounded-full shadow-none text-lg"
+            className="h-16 px-3 py-2 bg-[#033f41] text-white font-medium rounded-full shadow-none text-lg"
           >
             Limpar Filtros
           </button>

@@ -61,8 +61,8 @@ const Grafico = ({ data, loading, onItemClick, onClearFilter }) => {
           const value = parseFloat(item['medias_saeb.media_lp_avg'] || 0);
           return value;
         }),
-        backgroundColor: '#0891b2',
-        borderColor: '#0891b2',
+        backgroundColor: '#00a5ae',
+        borderColor: '#00a5ae',
         borderWidth: 1,
       },
       {
@@ -71,8 +71,8 @@ const Grafico = ({ data, loading, onItemClick, onClearFilter }) => {
           const value = parseFloat(item['medias_saeb.media_ma_avg'] || 0);
           return value;
         }),
-        backgroundColor: '#f97316', // orange-500
-        borderColor: '#f97316',
+        backgroundColor: '#8540b7',
+        borderColor: '#8540b7',
         borderWidth: 1,
       },
     ],
@@ -129,6 +129,7 @@ const Grafico = ({ data, loading, onItemClick, onClearFilter }) => {
       y: {
         beginAtZero: true,
         max: 10,
+        display: false,
         grid: {
           color: 'rgba(0, 0, 0, 0.1)',
         },
@@ -156,11 +157,11 @@ const Grafico = ({ data, loading, onItemClick, onClearFilter }) => {
       {/* Legenda personalizada */}
       <div className="flex justify-center space-x-6 mt-4">
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-cyan-600 rounded"></div>
+          <div className="w-4 h-4 bg-[#00a5ae] px-4"></div>
           <span className="text-sm text-gray-600">Média LP</span>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-orange-500 rounded"></div>
+          <div className="w-4 h-4 bg-[#8540b7] px-4"></div>
           <span className="text-sm text-gray-600">Média MA</span>
         </div>
       </div>

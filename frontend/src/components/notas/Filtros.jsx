@@ -63,7 +63,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
       } catch (err) {
         console.error('Erro ao buscar fases:', err);
       }
-    } 
+    }
 
     async function fetchTurmas() {
       try {
@@ -91,110 +91,124 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
   };
 
   return (
-    <div className="bg-cyan-600 p-4 rounded-none">
-      <div className="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
-        {/* Título */}
-        <div className="text-white">
+    <div className="bg-[#18adb6] px-8 py-5 rounded-tr-[50px] rounded-br-[50px]">
+      <div className="grid grid-cols-[auto_1fr_auto] items-end gap-5">
+        {/* Título (esquerda) */}
+        <div className="flex items-center h-full text-white text-center justify-self-center" style={{ minHeight: '64px' }}>
           <h1 className="text-2xl font-bold">Desempenho de Notas</h1>
         </div>
 
         {/* Filtros */}
-        <div className="flex items-end space-x-4">
+        <div className="justify-self-center flex items-end space-x-4">
           {/* Filtro Simulado */}
           <div className="flex flex-col">
-            <label className="text-white text-sm mb-1">Simulado</label>
-            <select
-              className="input-field w-32 h-10"
-              value={filters.simulado || 'Todos'}
-              onChange={(e) => handleFilterChange('simulado', e.target.value)}
-            >
-              <option value="Todos">Todos</option>
-              {simulados.map((simulado, index) => (
-                <option key={index} value={simulado}>
-                  {simulado}
-                </option>
-              ))}
-            </select>
+            <label className="text-white text-sm font-semibold mb-1">Simulado</label>
+            <div className="relative">
+              <select
+                className="w-32 h-10 px-3 pr-8 bg-[#18adb6] text-white border border-white rounded-none focus:outline-none focus:ring-2 focus:ring-white/60 appearance-none focus:text-black"
+                value={filters.simulado || 'Todos'}
+                onChange={(e) => handleFilterChange('simulado', e.target.value)}
+              >
+                <option value="Todos" className="text-black">Todos</option>
+                {simulados.map((simulado, index) => (
+                  <option key={index} value={simulado} className="text-black">
+                    {simulado}
+                  </option>
+                ))}
+              </select>
+              <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-white">▾</span>
+            </div>
           </div>
 
           {/* Filtro Distrito */}
           <div className="flex flex-col">
-            <label className="text-white text-sm mb-1">Distrito</label>
-            <select
-              className="input-field w-32 h-10"
-              value={filters.distrito || 'Todos'}
-              onChange={(e) => handleFilterChange('distrito', e.target.value)}
-            >
-              <option value="Todos">Todos</option>
-              {distritos.map((distrito, index) => (
-                <option key={index} value={distrito}>
-                  {distrito}
-                </option>
-              ))}
-            </select>
+            <label className="text-white text-sm font-semibold mb-1">Distrito</label>
+            <div className="relative">
+              <select
+                className="w-32 h-10 px-3 pr-8 bg-[#18adb6] text-white border border-white rounded-none focus:outline-none focus:ring-2 focus:ring-white/60 appearance-none focus:text-black"
+                value={filters.distrito || 'Todos'}
+                onChange={(e) => handleFilterChange('distrito', e.target.value)}
+              >
+                <option value="Todos" className="text-black">Todos</option>
+                {distritos.map((distrito, index) => (
+                  <option key={index} value={distrito} className="text-black">
+                    {distrito}
+                  </option>
+                ))}
+              </select>
+              <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-white">▾</span>
+            </div>
           </div>
 
           {/* Filtro Escola */}
           <div className="flex flex-col">
-            <label className="text-white text-sm mb-1">Escola</label>
-            <select
-              className="input-field w-32 h-10"
-              value={filters.escola || 'Todos'}
-              onChange={(e) => handleFilterChange('escola', e.target.value)}
-            >
-              <option value="Todos">Todos</option>
-              {escolas.map((escola, index) => (
-                <option key={index} value={escola}>
-                  {escola}
-                </option>
-              ))}
-            </select>
+            <label className="text-white text-sm font-semibold mb-1">Escola</label>
+            <div className="relative">
+              <select
+                className="w-32 h-10 px-3 pr-8 bg-[#18adb6] text-white border border-white rounded-none focus:outline-none focus:ring-2 focus:ring-white/60 appearance-none focus:text-black"
+                value={filters.escola || 'Todos'}
+                onChange={(e) => handleFilterChange('escola', e.target.value)}
+              >
+                <option value="Todos" className="text-black">Todos</option>
+                {escolas.map((escola, index) => (
+                  <option key={index} value={escola} className="text-black">
+                    {escola}
+                  </option>
+                ))}
+              </select>
+              <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-white">▾</span>
+            </div>
           </div>
 
-          {/* Filtro Fase */}
+          {/* Filtro Ano (usa campo fase) */}
           <div className="flex flex-col">
-            <label className="text-white text-sm mb-1">Fase</label>
-            <select
-              className="input-field w-32 h-10"
-              value={filters.fase || 'Todos'}
-              onChange={(e) => handleFilterChange('fase', e.target.value)}
-            >
-              <option value="Todos">Todos</option>
-              {fases.map((fase, index) => (
-                <option key={index} value={fase}>
-                  {fase}
-                </option>
-              ))}
-            </select>
+            <label className="text-white text-sm font-semibold mb-1">Ano</label>
+            <div className="relative">
+              <select
+                className="w-32 h-10 px-3 pr-8 bg-[#18adb6] text-white border border-white rounded-none focus:outline-none focus:ring-2 focus:ring-white/60 appearance-none focus:text-black"
+                value={filters.fase || 'Todos'}
+                onChange={(e) => handleFilterChange('fase', e.target.value)}
+              >
+                <option value="Todos" className="text-black">Todos</option>
+                {fases.map((fase, index) => (
+                  <option key={index} value={fase} className="text-black">
+                    {fase}
+                  </option>
+                ))}
+              </select>
+              <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-white">▾</span>
+            </div>
           </div>
 
           {/* Filtro Turma */}
           <div className="flex flex-col">
-            <label className="text-white text-sm mb-1">Turma</label>
-            <select
-              className="input-field w-32 h-10"
-              value={filters.turma || 'Todos'}
-              onChange={(e) => handleFilterChange('turma', e.target.value)}
-            >
-              <option value="Todos">Todos</option>
-              {turmas.map((turma, index) => (
-                <option key={index} value={turma}>
-                  {turma}
-                </option>
-              ))}
-            </select>
+            <label className="text-white text-sm font-semibold mb-1">Turma</label>
+            <div className="relative">
+              <select
+                className="w-32 h-10 px-3 pr-8 bg-[#18adb6] text-white border border-white rounded-none focus:outline-none focus:ring-2 focus:ring-white/60 appearance-none focus:text-black"
+                value={filters.turma || 'Todos'}
+                onChange={(e) => handleFilterChange('turma', e.target.value)}
+              >
+                <option value="Todos" className="text-black">Todos</option>
+                {turmas.map((turma, index) => (
+                  <option key={index} value={turma} className="text-black">
+                    {turma}
+                  </option>
+                ))}
+              </select>
+              <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-white">▾</span>
+            </div>
           </div>
+        </div>
 
-          {/* Botão Limpar Filtros */}
-          <div className="flex flex-col">
-            <div className="h-5"></div> {/* Espaçador para alinhar com os labels */}
-            <button
-              onClick={onClearFilters}
-              className="btn-primary h-10 px-4"
-            >
-              Limpar Filtros
-            </button>
-          </div>
+        {/* Botão (direita) */}
+        <div className="justify-self-end -mr-4">
+          <button
+            onClick={onClearFilters}
+            className="h-16 px-3 py-2 bg-[#033f41] text-white font-medium rounded-full shadow-none text-lg"
+          >
+            Limpar Filtros
+          </button>
         </div>
       </div>
     </div>

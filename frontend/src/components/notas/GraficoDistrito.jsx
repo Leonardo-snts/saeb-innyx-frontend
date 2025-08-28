@@ -61,8 +61,8 @@ const GraficoDistrito = ({ data, loading, onItemClick, onClearFilter }) => {
           const value = parseFloat(item['desempenho_notas.porcet_total_acertos'] || 0) * 100;
           return value;
         }),
-        backgroundColor: '#0891b2', // teal-600
-        borderColor: '#0891b2',
+        backgroundColor: '#033f41',
+        borderColor: '#033f41',
         borderWidth: 1,
       },
       {
@@ -71,7 +71,7 @@ const GraficoDistrito = ({ data, loading, onItemClick, onClearFilter }) => {
           const value = parseFloat(item['desempenho_notas.porcet_total_erros'] || 0) * 100;
           return value;
         }),
-        backgroundColor: '#f97316', // orange-500
+        backgroundColor: '#f97316',
         borderColor: '#f97316',
         borderWidth: 1,
       },
@@ -129,6 +129,7 @@ const GraficoDistrito = ({ data, loading, onItemClick, onClearFilter }) => {
       y: {
         beginAtZero: true,
         max: 100,
+        display: false,
         grid: {
           color: 'rgba(0, 0, 0, 0.1)',
         },
@@ -156,11 +157,11 @@ const GraficoDistrito = ({ data, loading, onItemClick, onClearFilter }) => {
       {/* Legenda personalizada */}
       <div className="flex justify-center space-x-6 mt-4">
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-cyan-600 rounded"></div>
+          <div className="w-4 h-4 bg-[#033f41] px-4"></div>
           <span className="text-sm text-gray-600">% Acertos</span>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-orange-500 rounded"></div>
+          <div className="w-4 h-4 bg-orange-500 px-4"></div>
           <span className="text-sm text-gray-600">% Erros</span>
         </div>
       </div>

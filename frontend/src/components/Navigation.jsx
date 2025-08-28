@@ -74,6 +74,23 @@ const Navigation = () => {
             className="w-6 h-6 filter brightness-0 invert"
           />
         </Link>
+
+        {/* Turma */}
+        <Link
+          to="/turma"
+          className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ${
+            location.pathname === '/turma'
+              ? 'bg-blue-800 shadow-lg scale-110'
+              : 'bg-cyan-600 hover:bg-cyan-800 hover:scale-105'
+          }`}
+          title="Turma"
+        >
+          <img 
+            src="/icons/class-report.svg" 
+            alt="Turma" 
+            className="w-6 h-6 filter brightness-0 invert"
+          />
+        </Link>
       </div>
     </nav>
   );

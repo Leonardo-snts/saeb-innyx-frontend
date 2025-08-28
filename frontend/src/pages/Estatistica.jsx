@@ -229,69 +229,12 @@ const Estatistica = () => {
         onClearFilters={handleClearFilters}
       />
 
-      {/* Indicador de filtros ativos */}
-      <div className="mx-8 mt-4 mb-2">
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-          <h4 className="text-sm font-medium text-blue-800 mb-2">
-            🔍 Filtros Ativos:
-          </h4>
-          <div className="flex flex-wrap gap-2">
-            {Object.entries(filters).map(([key, value]) => {
-              if (value !== 'Todos') {
-                return (
-                  <div key={key} className="flex items-center space-x-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs">
-                    <span className="font-medium">{key}:</span>
-                    <span>{value}</span>
-                    <button
-                      onClick={() => handleClearSpecificFilter(key)}
-                      className="text-blue-600 hover:text-blue-800 font-bold"
-                      title={`Remover filtro de ${key}`}
-                    >
-                      ×
-                    </button>
-                  </div>
-                );
-              }
-              return null;
-            })}
-            {Object.values(filters).every(value => value === 'Todos') && (
-              <span className="text-blue-600 text-sm italic">Nenhum filtro ativo</span>
-            )}
-          </div>
-          
-          {/* Botão de teste para verificar filtros */}
-          <div className="mt-3 pt-3 border-t border-blue-200">
-            <button
-              onClick={() => {
-                console.log('🧪 Teste: Aplicando filtro de questão = 1');
-                handleItemClick('questao', '1');
-              }}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs"
-            >
-              🧪 Testar Filtro (Questão = 1)
-            </button>
-            <button
-              onClick={() => {
-                console.log('🧪 Teste: Aplicando filtro de fase = 1');
-                handleItemClick('fase', '1');
-              }}
-              className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs ml-2"
-            >
-              🧪 Testar Filtro (Fase = 1)
-            </button>
-          </div>
-        </div>
-      </div>
-
       {/* Gráfico de questões */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mx-8 mb-8">
+      <div className="mx-8 mb-8">
         <div className="text-center mb-4">
           <h2 className="text-xl font-semibold text-gray-700 mb-2">
             % Acertos por Questão
           </h2>
-          <p className="text-sm text-gray-500">
-            🎯 Clique nas barras para filtrar por questão específica
-          </p>
         </div>
         <GraficoColuna 
           data={data.graficoColuna} 

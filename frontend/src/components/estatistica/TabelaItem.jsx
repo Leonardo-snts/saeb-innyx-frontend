@@ -172,371 +172,405 @@ const TabelaItem = ({ data, loading, onItemClick, onClearFilter }) => {
     }
 
     return (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-            <div className="bg-cyan-600 px-6 py-3">
-                <h3 className="text-lg font-semibold text-white">Dados Detalhados</h3>
-                <p className="text-cyan-100 text-sm mt-1">💡 Clique em uma linha para aplicar filtros detalhados (questão, fase, gabarito, eixo, etc.)</p>
-            </div>
-
-            <div className="overflow-auto max-h-96">
-                <table className="w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50 sticky top-0 z-10">
-                        <tr>
-                            <th 
-                                className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-20 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.fase')}
-                            >
-                                <div className="flex items-center space-x-1">
-                                    <span>Fase</span>
-                                    {sortConfig.key === 'estatistica_saeb.fase' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+        <div className="bg-white overflow-hidden shadow-sm border border-gray-200">
+            <div className="overflow-x-auto">
+                <div className="min-w-full inline-block align-middle">
+                    <div className="overflow-y-auto max-h-[400px]">
+                        <table className="min-w-full divide-y divide-gray-200">
+                            <thead className="bg-[#033f41]">
+                                <tr>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[60px]"
+                                        onClick={() => handleSort('estatistica_saeb.fase')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <span className='text-[9px] leading-tight'>Fase</span>
+                                            {sortConfig.key === 'estatistica_saeb.fase' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-16 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.questao')}
-                            >
-                                <div className="flex items-center justify-center space-x-1">
-                                    <span>Questão</span>
-                                    {sortConfig.key === 'estatistica_saeb.questao' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[60px]"
+                                        onClick={() => handleSort('estatistica_saeb.questao')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <span className='text-[9px] leading-tight'>Questão</span>
+                                            {sortConfig.key === 'estatistica_saeb.questao' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-16 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.gabarito')}
-                            >
-                                <div className="flex items-center justify-center space-x-1">
-                                    <span>Gabarito</span>
-                                    {sortConfig.key === 'estatistica_saeb.gabarito' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[70px]"
+                                        onClick={() => handleSort('estatistica_saeb.gabarito')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <span className='text-[9px] leading-tight'>Gabarito</span>
+                                            {sortConfig.key === 'estatistica_saeb.gabarito' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.eixo_cem')}
-                            >
-                                <div className="flex items-center space-x-1">
-                                    <span>Eixo</span>
-                                    {sortConfig.key === 'estatistica_saeb.eixo_cem' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[80px]"
+                                        onClick={() => handleSort('estatistica_saeb.eixo_cem')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <span className='text-[9px] leading-tight'>Eixo</span>
+                                            {sortConfig.key === 'estatistica_saeb.eixo_cem' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-20 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.ch_cem')}
-                            >
-                                <div className="flex items-center justify-center space-x-1">
-                                    <span>CH CEM</span>
-                                    {sortConfig.key === 'estatistica_saeb.ch_cem' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[80px]"
+                                        onClick={() => handleSort('estatistica_saeb.ch_cem')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <div className="text-[9px] leading-tight">
+                                                <div>CH</div>
+                                                <div>CEM</div>
+                                            </div>
+                                            {sortConfig.key === 'estatistica_saeb.ch_cem' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-48 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.habilidade_cem')}
-                            >
-                                <div className="flex items-center space-x-1">
-                                    <span>Descrição de Habilidade CEM</span>
-                                    {sortConfig.key === 'estatistica_saeb.habilidade_cem' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[120px]"
+                                        onClick={() => handleSort('estatistica_saeb.habilidade_cem')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <div className="text-[9px] leading-tight text-center">
+                                                <div>Descrição de</div>
+                                                <div>Habilidade</div>
+                                                <div>CEM</div>
+                                            </div>
+                                            {sortConfig.key === 'estatistica_saeb.habilidade_cem' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-20 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.ch_saeb')}
-                            >
-                                <div className="flex items-center justify-center space-x-1">
-                                    <span>CH SAEB</span>
-                                    {sortConfig.key === 'estatistica_saeb.ch_saeb' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[80px]"
+                                        onClick={() => handleSort('estatistica_saeb.ch_saeb')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <div className="text-[9px] leading-tight">
+                                                <div>CH</div>
+                                                <div>SAEB</div>
+                                            </div>
+                                            {sortConfig.key === 'estatistica_saeb.ch_saeb' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-48 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.habilidade_saeb')}
-                            >
-                                <div className="flex items-center space-x-1">
-                                    <span>Descrição de Habilidade SAEB</span>
-                                    {sortConfig.key === 'estatistica_saeb.habilidade_saeb' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[120px]"
+                                        onClick={() => handleSort('estatistica_saeb.habilidade_saeb')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <div className="text-[9px] leading-tight text-center">
+                                                <div>Descrição de</div>
+                                                <div>Habilidade</div>
+                                                <div>SAEB</div>
+                                            </div>
+                                            {sortConfig.key === 'estatistica_saeb.habilidade_saeb' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-16 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.cc')}
-                            >
-                                <div className="flex items-center justify-center space-x-1">
-                                    <span>CC</span>
-                                    {sortConfig.key === 'estatistica_saeb.cc' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[50px]"
+                                        onClick={() => handleSort('estatistica_saeb.cc')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <span className='text-[9px] leading-tight'>CC</span>
+                                            {sortConfig.key === 'estatistica_saeb.cc' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-20 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.porcentagem_acertos')}
-                            >
-                                <div className="flex items-center justify-center space-x-1">
-                                    <span>% Acertos</span>
-                                    {sortConfig.key === 'estatistica_saeb.porcentagem_acertos' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[80px]"
+                                        onClick={() => handleSort('estatistica_saeb.porcentagem_acertos')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <div className="text-[9px] leading-tight">
+                                                <div>%</div>
+                                                <div>Acertos</div>
+                                            </div>
+                                            {sortConfig.key === 'estatistica_saeb.porcentagem_acertos' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-16 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.porcentagem_A')}
-                            >
-                                <div className="flex items-center justify-center space-x-1">
-                                    <span>% A</span>
-                                    {sortConfig.key === 'estatistica_saeb.porcentagem_A' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[60px]"
+                                        onClick={() => handleSort('estatistica_saeb.porcentagem_A')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <div className="text-[9px] leading-tight">
+                                                <div>%</div>
+                                                <div>A</div>
+                                            </div>
+                                            {sortConfig.key === 'estatistica_saeb.porcentagem_A' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-16 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.porcentagem_B')}
-                            >
-                                <div className="flex items-center justify-center space-x-1">
-                                    <span>% B</span>
-                                    {sortConfig.key === 'estatistica_saeb.porcentagem_B' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[60px]"
+                                        onClick={() => handleSort('estatistica_saeb.porcentagem_B')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <div className="text-[9px] leading-tight">
+                                                <div>%</div>
+                                                <div>B</div>
+                                            </div>
+                                            {sortConfig.key === 'estatistica_saeb.porcentagem_B' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-16 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.porcentagem_C')}
-                            >
-                                <div className="flex items-center justify-center space-x-1">
-                                    <span>% C</span>
-                                    {sortConfig.key === 'estatistica_saeb.porcentagem_C' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[60px]"
+                                        onClick={() => handleSort('estatistica_saeb.porcentagem_C')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <div className="text-[9px] leading-tight">
+                                                <div>%</div>
+                                                <div>C</div>
+                                            </div>
+                                            {sortConfig.key === 'estatistica_saeb.porcentagem_C' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-16 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.porcentagem_D')}
-                            >
-                                <div className="flex items-center justify-center space-x-1">
-                                    <span>% D</span>
-                                    {sortConfig.key === 'estatistica_saeb.porcentagem_D' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[60px]"
+                                        onClick={() => handleSort('estatistica_saeb.porcentagem_D')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <div className="text-[9px] leading-tight">
+                                                <div>%</div>
+                                                <div>D</div>
+                                            </div>
+                                            {sortConfig.key === 'estatistica_saeb.porcentagem_D' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-24 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.porcentagem_embranco')}
-                            >
-                                <div className="flex items-center justify-center space-x-1">
-                                    <span>% Em Branco</span>
-                                    {sortConfig.key === 'estatistica_saeb.porcentagem_embranco' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[100px]"
+                                        onClick={() => handleSort('estatistica_saeb.porcentagem_embranco')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <div className="text-[9px] leading-tight">
+                                                <div>% Em</div>
+                                                <div>Branco</div>
+                                            </div>
+                                            {sortConfig.key === 'estatistica_saeb.porcentagem_embranco' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                            <th 
-                                className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-20 cursor-pointer hover:bg-gray-100 select-none"
-                                onClick={() => handleSort('estatistica_saeb.porcentagem_rasura')}
-                            >
-                                <div className="flex items-center justify-center space-x-1">
-                                    <span>% Rasura</span>
-                                    {sortConfig.key === 'estatistica_saeb.porcentagem_rasura' && (
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            {sortConfig.direction === 'asc' ? (
-                                                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                                            ) : (
-                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </div>
+                                    </th>
+                                    <th 
+                                        className="bg-[#033f41] px-2 py-3 text-center font-extrabold text-white tracking-wider cursor-pointer hover:bg-gray-600 select-none min-w-[80px]"
+                                        onClick={() => handleSort('estatistica_saeb.porcentagem_rasura')}
+                                    >
+                                        <div className="flex flex-col items-center justify-center space-y-1">
+                                            <div className="text-[9px] leading-tight">
+                                                <div>%</div>
+                                                <div>Rasura</div>
+                                            </div>
+                                            {sortConfig.key === 'estatistica_saeb.porcentagem_rasura' && (
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    {sortConfig.direction === 'asc' ? (
+                                                        <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                                                    ) : (
+                                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    )}
+                                                </svg>
                                             )}
-                                        </svg>
-                                    )}
-                                </div>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                        {sortedData.map((item, index) => (
-                            <tr 
-                                key={index} 
-                                className={`hover:bg-gray-50 h-10 cursor-pointer transition-colors duration-150 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`} 
-                                onClick={() => handleRowClick(item)}
-                                title="Clique para filtrar por esta questão/fase"
-                            >
-                                <td className="px-3 py-2 text-xs font-medium text-gray-900 w-20">
-                                    {item['estatistica_saeb.fase'] || '--'}
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 text-center w-16">
-                                    {item['estatistica_saeb.questao'] || '--'}
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 text-center w-16">
-                                    {item['estatistica_saeb.gabarito'] || '--'}
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 w-32 truncate" title={item['estatistica_saeb.eixo_cem'] || '--'}>
-                                    {truncateText(item['estatistica_saeb.eixo_cem'] || '--')}
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 text-center w-20">
-                                    {item['estatistica_saeb.ch_cem'] || '--'}
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 w-48 truncate" title={item['estatistica_saeb.habilidade_cem'] || '--'}>
-                                    {truncateText(item['estatistica_saeb.habilidade_cem'] || '--')}
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 text-center w-20">
-                                    {item['estatistica_saeb.ch_saeb'] || '--'}
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 w-48 truncate" title={item['estatistica_saeb.habilidade_saeb'] || '--'}>
-                                    {truncateText(item['estatistica_saeb.habilidade_saeb'] || '--')}
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 text-center w-16">
-                                    {item['estatistica_saeb.cc'] || '--'}
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 text-center w-20">
-                                    {item['estatistica_saeb.porcentagem_acertos'] ? 
-                                        `${(parseFloat(item['estatistica_saeb.porcentagem_acertos']) * 100).toFixed(1).replace('.', ',')}%` : 
-                                        '--'
-                                    }
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 text-center w-16">
-                                    {item['estatistica_saeb.porcentagem_A'] ? 
-                                        `${(parseFloat(item['estatistica_saeb.porcentagem_A']) * 100).toFixed(1).replace('.', ',')}%` : 
-                                        '--'
-                                    }
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 text-center w-16">
-                                    {item['estatistica_saeb.porcentagem_B'] ? 
-                                        `${(parseFloat(item['estatistica_saeb.porcentagem_B']) * 100).toFixed(1).replace('.', ',')}%` : 
-                                        '--'
-                                    }
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 text-center w-16">
-                                    {item['estatistica_saeb.porcentagem_C'] ? 
-                                        `${(parseFloat(item['estatistica_saeb.porcentagem_C']) * 100).toFixed(1).replace('.', ',')}%` : 
-                                        '--'
-                                    }
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 text-center w-16">
-                                    {item['estatistica_saeb.porcentagem_D'] ? 
-                                        `${(parseFloat(item['estatistica_saeb.porcentagem_D']) * 100).toFixed(1).replace('.', ',')}%` : 
-                                        '--'
-                                    }
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 text-center w-24">
-                                    {item['estatistica_saeb.porcentagem_embranco'] ? 
-                                        `${(parseFloat(item['estatistica_saeb.porcentagem_embranco']) * 100).toFixed(1).replace('.', ',')}%` : 
-                                        '--'
-                                    }
-                                </td>
-                                <td className="px-3 py-2 text-xs text-gray-900 text-center w-20">
-                                    {item['estatistica_saeb.porcentagem_rasura'] ? 
-                                        `${(parseFloat(item['estatistica_saeb.porcentagem_rasura']) * 100).toFixed(1).replace('.', ',')}%` : 
-                                        '--'
-                                    }
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody className="bg-white divide-y divide-gray-200">
+                                {sortedData.map((item, index) => (
+                                    <tr 
+                                        key={index} 
+                                        className={`hover:bg-gray-50 h-[50px] cursor-pointer transition-colors duration-150 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`} 
+                                        onClick={() => handleRowClick(item)}
+                                        title="Clique para filtrar por esta questão/fase"
+                                    >
+                                        <td className="px-2 py-2 text-xs font-medium text-gray-900 text-center min-w-[60px]">
+                                            {item['estatistica_saeb.fase'] || '--'}
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[60px]">
+                                            {item['estatistica_saeb.questao'] || '--'}
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[70px]">
+                                            {item['estatistica_saeb.gabarito'] || '--'}
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[80px] truncate" title={item['estatistica_saeb.eixo_cem'] || '--'}>
+                                            {truncateText(item['estatistica_saeb.eixo_cem'] || '--', 15)}
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[80px]">
+                                            {item['estatistica_saeb.ch_cem'] || '--'}
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[120px] truncate" title={item['estatistica_saeb.habilidade_cem'] || '--'}>
+                                            {truncateText(item['estatistica_saeb.habilidade_cem'] || '--', 25)}
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[80px]">
+                                            {item['estatistica_saeb.ch_saeb'] || '--'}
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[120px] truncate" title={item['estatistica_saeb.habilidade_saeb'] || '--'}>
+                                            {truncateText(item['estatistica_saeb.habilidade_saeb'] || '--', 25)}
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[50px]">
+                                            {item['estatistica_saeb.cc'] || '--'}
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[80px]">
+                                            {item['estatistica_saeb.porcentagem_acertos'] ? 
+                                                `${(parseFloat(item['estatistica_saeb.porcentagem_acertos']) * 100).toFixed(1).replace('.', ',')}%` : 
+                                                '--'
+                                            }
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[60px]">
+                                            {item['estatistica_saeb.porcentagem_A'] ? 
+                                                `${(parseFloat(item['estatistica_saeb.porcentagem_A']) * 100).toFixed(1).replace('.', ',')}%` : 
+                                                '--'
+                                            }
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[60px]">
+                                            {item['estatistica_saeb.porcentagem_B'] ? 
+                                                `${(parseFloat(item['estatistica_saeb.porcentagem_B']) * 100).toFixed(1).replace('.', ',')}%` : 
+                                                '--'
+                                            }
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[60px]">
+                                            {item['estatistica_saeb.porcentagem_C'] ? 
+                                                `${(parseFloat(item['estatistica_saeb.porcentagem_C']) * 100).toFixed(1).replace('.', ',')}%` : 
+                                                '--'
+                                            }
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[60px]">
+                                            {item['estatistica_saeb.porcentagem_D'] ? 
+                                                `${(parseFloat(item['estatistica_saeb.porcentagem_D']) * 100).toFixed(1).replace('.', ',')}%` : 
+                                                '--'
+                                            }
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[100px]">
+                                            {item['estatistica_saeb.porcentagem_embranco'] ? 
+                                                `${(parseFloat(item['estatistica_saeb.porcentagem_embranco']) * 100).toFixed(1).replace('.', ',')}%` : 
+                                                '--'
+                                            }
+                                        </td>
+                                        <td className="px-2 py-2 text-xs text-gray-900 text-center min-w-[80px]">
+                                            {item['estatistica_saeb.porcentagem_rasura'] ? 
+                                                `${(parseFloat(item['estatistica_saeb.porcentagem_rasura']) * 100).toFixed(1).replace('.', ',')}%` : 
+                                                '--'
+                                            }
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     );

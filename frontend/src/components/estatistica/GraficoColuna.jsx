@@ -92,8 +92,8 @@ const GraficoColuna = ({ data, loading, onItemClick, onClearFilter }) => {
           const value = parseFloat(item['estatistica_saeb.porcentagem_acertos'] || 0) * 100;
           return value;
         }),
-        backgroundColor: '#0891b2', // teal-600
-        borderColor: '#0891b2',
+        backgroundColor: '#00a5ae',
+        borderColor: '#00a5ae',
         borderWidth: 1,
       },
     ],
@@ -150,6 +150,7 @@ const GraficoColuna = ({ data, loading, onItemClick, onClearFilter }) => {
       y: {
         beginAtZero: true,
         max: 100,
+        display: false,
         grid: {
           color: 'rgba(0, 0, 0, 0.1)',
         },
@@ -172,14 +173,6 @@ const GraficoColuna = ({ data, loading, onItemClick, onClearFilter }) => {
     <div className="w-full">
       <div className="h-64">
         <Bar data={chartData} options={options} />
-      </div>
-      
-      {/* Legenda personalizada */}
-      <div className="flex justify-center space-x-6 mt-4">
-        <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-cyan-600 rounded"></div>
-          <span className="text-sm text-gray-600">% Acertos</span>
-        </div>
       </div>
     </div>
   );

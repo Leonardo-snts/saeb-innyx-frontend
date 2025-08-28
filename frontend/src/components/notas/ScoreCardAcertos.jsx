@@ -3,7 +3,7 @@ import React from 'react';
 const ScoreCardAcertos = ({ data, loading }) => {
   if (loading) {
     return (
-      <div className="bg-teal-700 rounded-lg shadow-sm p-8 text-center">
+      <div className="bg-[#033f41] rounded-3xl shadow-sm p-8 text-center w-2/12">
         <div className="animate-pulse">
           <h3 className="text-xl font-semibold text-white mb-4">Acertos</h3>
           <div className="text-4xl font-bold text-white">-</div>
@@ -14,7 +14,7 @@ const ScoreCardAcertos = ({ data, loading }) => {
 
   if (!data || !data.length) {
     return (
-      <div className="bg-teal-700 rounded-lg shadow-sm p-8 text-center">
+      <div className="bg-[#033f41] rounded-3xl shadow-sm p-8 text-center w-2/12">
         <h3 className="text-xl font-semibold text-white mb-4">Acertos</h3>
         <div className="text-4xl font-bold text-white">-</div>
       </div>
@@ -28,7 +28,7 @@ const ScoreCardAcertos = ({ data, loading }) => {
     '-';
 
   return (
-    <div className="bg-teal-700 rounded-lg shadow-sm p-8 text-center">
+    <div className="bg-[#033f41] rounded-3xl shadow-sm p-8 text-center w-2/12">
       <h3 className="text-xl font-semibold text-white mb-4">Acertos</h3>
       <div className="text-4xl font-bold text-white">
         {porcentagemAcertos === '-' ? '-' : `${porcentagemAcertos}%`}

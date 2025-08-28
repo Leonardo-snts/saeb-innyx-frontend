@@ -274,3 +274,45 @@ export async function getAllEstatisticaData(filters = {}) {
     throw error;
   }
 }
+
+// ======================================== TELA TURMA ========================================
+
+export async function getTabelaTurma(filters = {}) {
+  try {
+    const params = {
+      lookId: 498,
+      ...filters,
+    };
+    console.log('📋 getTabelaTurma - params:', params);
+    
+    const response = await axios.get(`${BASE_URL}/processes`, { params });
+    console.log('📋 getTabelaTurma - response:', response.data);
+    
+    return response.data;
+  } catch (error) {
+    console.error('❌ Erro ao buscar dados da tabela turma:', error);
+    throw error;
+  }
+}
+
+export async function getAllTurmaData(filters = {}) {
+  try {
+    console.log('📡 getAllTurmaData recebeu filtros:', filters);
+    
+    const [tabelaTurma] = await Promise.all([
+      getTabelaTurma(filters)
+    ]);
+
+    console.log('📋 Dados da tabela turma:', tabelaTurma);
+
+    const result = {
+      tabelaTurma: tabelaTurma,
+    };
+
+    console.log('✅ Resultado final getAllTurmaData:', result);
+    return result;
+  } catch (error) {
+    console.error('❌ Erro ao buscar todos os dados de turma:', error);
+    throw error;
+  }
+}

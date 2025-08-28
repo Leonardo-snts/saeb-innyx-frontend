@@ -3,7 +3,7 @@ import React from 'react';
 const ScoreCardErros = ({ data, loading }) => {
   if (loading) {
     return (
-      <div className="bg-orange-500 rounded-lg shadow-sm p-8 text-center">
+      <div className="bg-orange-500 rounded-3xl shadow-sm p-8 text-center w-2/12">
         <div className="animate-pulse">
           <h3 className="text-xl font-semibold text-white mb-4">Erro</h3>
           <div className="text-4xl font-bold text-white">-</div>
@@ -14,7 +14,7 @@ const ScoreCardErros = ({ data, loading }) => {
 
   if (!data || !data.length) {
     return (
-      <div className="bg-orange-500 rounded-lg shadow-sm p-8 text-center">
+      <div className="bg-orange-500 rounded-3xl shadow-sm p-8 text-center w-2/12">
         <h3 className="text-xl font-semibold text-white mb-4">Erro</h3>
         <div className="text-4xl font-bold text-white">-</div>
       </div>
@@ -28,7 +28,7 @@ const ScoreCardErros = ({ data, loading }) => {
     '-';
 
   return (
-    <div className="bg-orange-500 rounded-lg shadow-sm p-8 text-center">
+    <div className="bg-orange-500 rounded-3xl shadow-sm p-8 text-center w-2/12">
       <h3 className="text-xl font-semibold text-white mb-4">Erro</h3>
       <div className="text-4xl font-bold text-white">
         {porcentagemErros === '-' ? '-' : `${porcentagemErros}%`}
