@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 
-const Tabela = ({ data, loading, onItemClick, onClearFilter }) => {
-    console.log('🎨 Tabela Turma renderizando com:', { data, loading, onItemClick, onClearFilter });
-
-    // Estado para controlar a ordenação
-    const [sortConfig, setSortConfig] = useState({
-        key: null,
-        direction: 'asc'
-    });
+const Tabela = ({ data, loading, onItemClick, onClearFilter, onSort, sortConfig }) => {
+    console.log('🎨 Tabela Turma renderizando com:', { data, loading, onItemClick, onClearFilter, onSort, sortConfig });
 
     // Função para truncar texto com mais de X caracteres
     const truncateText = (text, maxLength = 20) => {
@@ -16,46 +10,14 @@ const Tabela = ({ data, loading, onItemClick, onClearFilter }) => {
         return text.substring(0, maxLength) + '...';
     };
 
-    // Função para ordenar os dados
-    const sortData = (data, key, direction) => {
-        if (!key) return data;
-
-        return [...data].sort((a, b) => {
-            let aValue = a[key];
-            let bValue = b[key];
-
-            // Tratar valores especiais
-            if (aValue === '--' || aValue === 'null') aValue = '';
-            if (bValue === '--' || bValue === 'null') bValue = '';
-
-            // Converter para número se possível
-            const aNum = parseFloat(aValue);
-            const bNum = parseFloat(bValue);
-
-            if (!isNaN(aNum) && !isNaN(bNum)) {
-                // Ordenação numérica
-                return direction === 'asc' ? aNum - bNum : bNum - aNum;
-            } else {
-                // Ordenação alfabética
-                aValue = String(aValue).toLowerCase();
-                bValue = String(bValue).toLowerCase();
-                if (direction === 'asc') {
-                    return aValue.localeCompare(bValue);
-                } else {
-                    return bValue.localeCompare(aValue);
-                }
-            }
-        });
-    };
-
     // Função para lidar com o clique no cabeçalho
     const handleSort = (key) => {
-        let direction = 'asc';
-        if (sortConfig.key === key && sortConfig.direction === 'asc') {
-            direction = 'desc';
+        if (onSort) {
+            onSort(key);
         }
-        setSortConfig({ key, direction });
     };
+
+
 
     // Função para lidar com clique na linha da tabela
     const handleRowClick = (item) => {
@@ -85,8 +47,7 @@ const Tabela = ({ data, loading, onItemClick, onClearFilter }) => {
         }
     };
 
-    // Dados ordenados
-    const sortedData = sortData(data, sortConfig.key, sortConfig.direction);
+    // Dados já vêm ordenados do backend
 
     if (loading) {
         return (
@@ -308,7 +269,7 @@ const Tabela = ({ data, loading, onItemClick, onClearFilter }) => {
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
-                                {sortedData.map((item, index) => (
+                                {data.map((item, index) => (
                                     <tr 
                                         key={index} 
                                         className={`hover:bg-gray-50 h-[50px] cursor-pointer transition-colors duration-150 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`} 

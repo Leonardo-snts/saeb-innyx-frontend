@@ -22,10 +22,16 @@ const Turma = () => {
     const [pageSize, setPageSize] = useState(100);
     const [totalRecords, setTotalRecords] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
+    
+    // Estado para ordenação
+    const [sortConfig, setSortConfig] = useState({
+        field: null,
+        direction: 'asc'
+    });
 
     useEffect(() => {
         fetchData(filters, currentPage, pageSize);
-    }, [currentPage, pageSize]);
+    }, [currentPage, pageSize, sortConfig]);
 
     const handleFilterChange = (key, value) => {
         const newFilters = { ...filters, [key]: value };
@@ -47,15 +53,15 @@ const Turma = () => {
 
     const fetchData = async (newFilters, page = 1, limit = 100) => {
         try {
-            console.log('🚀 fetchData iniciado com filtros:', newFilters, 'página:', page, 'limite:', limit);
+            console.log('🚀 fetchData iniciado com filtros:', newFilters, 'página:', page, 'limite:', limit, 'ordenação:', sortConfig);
             setLoading(true);
             setError(null);
 
             const lookerFilters = buildLookerFilters(newFilters);
             console.log('🔧 Filtros convertidos para Looker:', lookerFilters);
 
-            console.log('📡 Chamando getAllTurmaData com paginação...');
-            const result = await getAllTurmaData(lookerFilters, page, limit);
+            console.log('📡 Chamando getAllTurmaData com paginação e ordenação...');
+            const result = await getAllTurmaData(lookerFilters, page, limit, sortConfig);
             console.log('📊 Resultado recebido da API:', result);
 
             setData(result);
@@ -100,6 +106,19 @@ const Turma = () => {
         setPageSize(newPageSize);
         setCurrentPage(1);
     };
+    
+    // Função para lidar com ordenação
+    const handleSort = (field) => {
+        let direction = 'asc';
+        if (sortConfig.field === field && sortConfig.direction === 'asc') {
+            direction = 'desc';
+        }
+        
+        const newSortConfig = { field, direction };
+        setSortConfig(newSortConfig);
+        setCurrentPage(1); // Reset para primeira página ao ordenar
+        console.log('🔄 Nova configuração de ordenação:', newSortConfig);
+    };
 
     // Calcular informações de paginação
     const startRecord = (currentPage - 1) * pageSize + 1;
@@ -130,6 +149,8 @@ const Turma = () => {
                 <Tabela
                     data={data.tabelaTurma?.data || []}
                     loading={loading}
+                    onSort={handleSort}
+                    sortConfig={sortConfig}
                 />
                 
                 {/* Controles de Paginação */}

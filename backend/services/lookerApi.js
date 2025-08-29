@@ -6,7 +6,7 @@ dotenv.config();
 const sdk = LookerNodeSDK.init40();
 
 // Função para buscar dados com paginação real
-export async function fetchProcessesFromLooker(lookId, filters = {}, page = 1, limit = 100) {
+export async function fetchProcessesFromLooker(lookId, filters = {}, page = 1, limit = 100, sortParams = null) {
   try {
     console.log(`📊 Buscando dados do Look ${lookId} - Página ${page}, Limite: ${limit}`);
     
@@ -21,12 +21,20 @@ export async function fetchProcessesFromLooker(lookId, filters = {}, page = 1, l
       console.log('Campos disponíveis para filtros (fields):', fullQuery.fields);
       console.log('Filtros atuais da query:', fullQuery.filters);
 
+      // Aplicar ordenação personalizada se fornecida
+      let sorts = fullQuery.sorts;
+      if (sortParams && sortParams.field) {
+        const sortDirection = sortParams.direction === 'desc' ? 'desc' : 'asc';
+        sorts = [sortParams.field + ' ' + sortDirection];
+        console.log(`🔄 Aplicando ordenação: ${sortParams.field} ${sortDirection}`);
+      }
+
       const inlineQueryBody = {
         model: fullQuery.model,
         view: fullQuery.view,
         fields: fullQuery.fields,
         filters: filters,
-        sorts: fullQuery.sorts,
+        sorts: sorts,
         limit: limit,
         offset: offset,
         dynamic_fields: fullQuery.dynamic_fields,
@@ -60,14 +68,47 @@ export async function fetchProcessesFromLooker(lookId, filters = {}, page = 1, l
     }
 
     // Sem filtros → usa o look direto com paginação
-    const result = await sdk.ok(
-      sdk.run_look({
-        look_id: lookId,
-        result_format: 'json',
+    let result;
+    if (sortParams && sortParams.field) {
+      // Se há ordenação, usar inline query para aplicar sorts personalizados
+      const look = await sdk.ok(sdk.look(lookId));
+      const fullQuery = await sdk.ok(sdk.query(look.query_id));
+      
+      const sortDirection = sortParams.direction === 'desc' ? 'desc' : 'asc';
+      const sorts = [sortParams.field + ' ' + sortDirection];
+      console.log(`🔄 Aplicando ordenação: ${sortParams.field} ${sortDirection}`);
+      
+      const inlineQueryBody = {
+        model: fullQuery.model,
+        view: fullQuery.view,
+        fields: fullQuery.fields,
+        filters: {},
+        sorts: sorts,
         limit: limit,
-        offset: offset
-      })
-    );
+        offset: offset,
+        dynamic_fields: fullQuery.dynamic_fields,
+        filter_expression: fullQuery.filter_expression,
+        vis_config: fullQuery.vis_config,
+        timezone: fullQuery.timezone,
+      };
+      
+      result = await sdk.ok(
+        sdk.run_inline_query({
+          result_format: 'json',
+          body: inlineQueryBody,
+        })
+      );
+    } else {
+      // Sem ordenação personalizada, usar look direto
+      result = await sdk.ok(
+        sdk.run_look({
+          look_id: lookId,
+          result_format: 'json',
+          limit: limit,
+          offset: offset
+        })
+      );
+    }
     
     console.log(`✅ Dados recebidos: ${result.length} linhas`);
     console.log(`📍 Primeiro registro:`, result[0] ? Object.values(result[0])[0] : 'N/A');
@@ -111,13 +152,13 @@ export async function fetchTotalCount(lookId, filters = {}) {
 }
 
 // Função para busca com paginação completa (dados + contagem total)
-export async function fetchProcessesWithPagination(lookId, filters = {}, page = 1, limit = 100) {
+export async function fetchProcessesWithPagination(lookId, filters = {}, page = 1, limit = 100, sortParams = null) {
   try {
     console.log(`🚀 Buscando dados com paginação completa - Página ${page}, Limite: ${limit}`);
     
     // Buscar dados e contagem em paralelo para melhor performance
     const [dataResult, totalCount] = await Promise.all([
-      fetchProcessesFromLooker(lookId, filters, page, limit),
+      fetchProcessesFromLooker(lookId, filters, page, limit, sortParams),
       fetchTotalCount(lookId, filters)
     ]);
     
@@ -166,7 +207,7 @@ export async function fetchProcessesWithPagination(lookId, filters = {}, page = 
 }
 
 // Função para paginação inteligente e rápida
-async function fetchSmartPagination(lookId, filters = {}, page = 1, limit = 100) {
+async function fetchSmartPagination(lookId, filters = {}, page = 1, limit = 100, sortParams = null) {
   try {
     console.log(`🚀 Implementando paginação inteligente para página ${page}`);
     
@@ -176,8 +217,8 @@ async function fetchSmartPagination(lookId, filters = {}, page = 1, limit = 100)
     
     console.log(`📍 Buscando registros ${startRecord + 1} a ${endRecord}`);
     
-    // Implementar paginação baseada em busca sequencial inteligente
-    const paginatedData = await fetchSequentialPagination(lookId, filters, page, limit);
+          // Implementar paginação baseada em busca sequencial inteligente
+      const paginatedData = await fetchSequentialPagination(lookId, filters, page, limit, sortParams);
     
     console.log(`✅ Paginação inteligente: ${paginatedData.length} registros para página ${page}`);
     return paginatedData;
@@ -192,7 +233,7 @@ async function fetchSmartPagination(lookId, filters = {}, page = 1, limit = 100)
 }
 
 // Função para paginação sequencial que realmente funciona
-async function fetchSequentialPagination(lookId, filters = {}, page = 1, limit = 100) {
+async function fetchSequentialPagination(lookId, filters = {}, page = 1, limit = 100, sortParams = null) {
   try {
     console.log(`🔄 Implementando paginação sequencial para página ${page}`);
     
@@ -279,7 +320,7 @@ async function fetchSequentialPagination(lookId, filters = {}, page = 1, limit =
 }
 
 // Função de fallback para casos de erro
-async function fetchFallbackPagination(lookId, filters = {}, page = 1, limit = 100) {
+async function fetchFallbackPagination(lookId, filters = {}, page = 1, limit = 100, sortParams = null) {
   try {
     console.log(`🔄 Fallback: buscando dados em lote menor...`);
     

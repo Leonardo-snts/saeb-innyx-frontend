@@ -277,7 +277,7 @@ export async function getAllEstatisticaData(filters = {}) {
 
 // ======================================== TELA TURMA ========================================
 
-export async function getTabelaTurma(filters = {}, page = 1, limit = 100, paginated = true) {
+export async function getTabelaTurma(filters = {}, page = 1, limit = 100, paginated = true, sortConfig = null) {
   try {
     const params = {
       lookId: 498,
@@ -286,6 +286,12 @@ export async function getTabelaTurma(filters = {}, page = 1, limit = 100, pagina
       paginated: paginated ? 'true' : 'false',
       ...filters,
     };
+    
+    // Adicionar parâmetros de ordenação se fornecidos
+    if (sortConfig && sortConfig.field) {
+      params.sortBy = sortConfig.field;
+      params.sortOrder = sortConfig.direction;
+    }
     
     console.log('📋 getTabelaTurma - params:', params);
     
@@ -299,11 +305,11 @@ export async function getTabelaTurma(filters = {}, page = 1, limit = 100, pagina
   }
 }
 
-export async function getAllTurmaData(filters = {}, page = 1, limit = 100) {
+export async function getAllTurmaData(filters = {}, page = 1, limit = 100, sortConfig = null) {
   try {
-    console.log('📡 getAllTurmaData recebeu filtros:', filters);
+    console.log('📡 getAllTurmaData recebeu filtros:', filters, 'ordenação:', sortConfig);
     
-    const tabelaTurma = await getTabelaTurma(filters, page, limit, true);
+    const tabelaTurma = await getTabelaTurma(filters, page, limit, true, sortConfig);
     
     console.log('📋 Dados da tabela turma:', tabelaTurma);
 
