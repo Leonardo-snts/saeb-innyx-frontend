@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Filtros from '../components/evolução/Filtros';
-import AcertosErros from '../components/evolução/AcertosErros';
-import Curricular from '../components/evolução/Curricular';
-import Participacao from '../components/evolução/Paricipacao';
+import Filtros from '../components/evolucao/Filtros';
+import AcertosErros from '../components/evolucao/AcertosErros';
+import Curricular from '../components/evolucao/Curricular';
+import Participacao from '../components/evolucao/Participacao';
 import { getAllEvolucaoData } from '../services/api';
 
 const Evolucao = () => {

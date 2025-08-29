@@ -45,7 +45,7 @@ const Participacao = ({ data, loading, onItemClick, onClearFilter }) => {
   const handleChartClick = (event, elements) => {
     if (elements && elements.length > 0) {
       const element = elements[0];
-      const distrito = data[element.index]['participacoes_saeb.distrito'];
+      const distrito = data[element.index]['evolucao_saeb.distrito'];
       
       if (distrito) {
         console.log(`Clicou no distrito: ${distrito}`);
@@ -57,13 +57,13 @@ const Participacao = ({ data, loading, onItemClick, onClearFilter }) => {
   // Processar dados para o formato do Chart.js
   // Usando os nomes corretos dos campos da API
   const chartData = {
-    labels: data.map(item => item['participacoes_saeb.distrito'] || 'Distrito'),
+    labels: data.map(item => item['evolucao_saeb.distrito'] || 'Distrito'),
     datasets: [
       {
         label: '% Presentes',
         data: data.map(item => {
-          const value = parseFloat(item['participacoes_saeb.porcet_presentes'] || 0) * 100;
-          console.log(`Presentes para ${item['participacoes_saeb.distrito']}: ${value}%`);
+          const value = parseFloat(item['evolucao_saeb.porcet_presentes'] || 0) * 100;
+          console.log(`Presentes para ${item['evolucao_saeb.distrito']}: ${value}%`);
           return value;
         }),
         borderColor: '#18adb6',
@@ -79,8 +79,8 @@ const Participacao = ({ data, loading, onItemClick, onClearFilter }) => {
       {
         label: '% Ausentes',
         data: data.map(item => {
-          const value = parseFloat(item['participacoes_saeb.porcet_ausentes'] || 0) * 100;
-          console.log(`Ausentes para ${item['participacoes_saeb.distrito']}: ${value}%`);
+          const value = parseFloat(item['evolucao_saeb.porcet_ausentes'] || 0) * 100;
+          console.log(`Ausentes para ${item['evolucao_saeb.distrito']}: ${value}%`);
           return value;
         }),
         borderColor: '#f97316', // orange-500
