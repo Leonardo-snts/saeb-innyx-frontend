@@ -14,7 +14,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 436 }); // Look para simulados
         const unique = [
           ...new Set(
-            response.map((item) => item['estatistica_saeb.simulado']).filter(Boolean)
+            (response.data || []).map((item) => item['estatistica_saeb.simulado']).filter(Boolean)
           ),
         ];
         setSimulados(unique);
@@ -28,7 +28,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 437 }); // Look para distritos
         const unique = [
           ...new Set(
-            response.map((item) => item['estatistica_saeb.distrito']).filter(Boolean)
+            (response.data || []).map((item) => item['estatistica_saeb.distrito']).filter(Boolean)
           ),
         ];
         setDistritos(unique);
@@ -42,7 +42,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 438 }); // Look para escolas
         const unique = [
           ...new Set(
-            response.map((item) => item['estatistica_saeb.escola']).filter(Boolean)
+            (response.data || []).map((item) => item['estatistica_saeb.escola']).filter(Boolean)
           ),
         ];
         setEscolas(unique);
@@ -56,7 +56,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 439 }); // Look para fases
         const unique = [
           ...new Set(
-            response.map((item) => item['estatistica_saeb.fase']).filter(Boolean)
+            (response.data || []).map((item) => item['estatistica_saeb.fase']).filter(Boolean)
           ),
         ];
         setFases(unique);
@@ -70,7 +70,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 440 }); // Look para turmas
         const unique = [
           ...new Set(
-            response.map((item) => item['estatistica_saeb.turma']).filter(Boolean)
+            (response.data || []).map((item) => item['estatistica_saeb.turma']).filter(Boolean)
           ),
         ];
         setTurmas(unique);

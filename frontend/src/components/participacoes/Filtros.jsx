@@ -13,7 +13,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 422 }); // Look para simulados
         const unique = [
           ...new Set(
-            response.map((item) => item['participacoes_saeb.simulado']).filter(Boolean)
+            (response.data || []).map((item) => item['participacoes_saeb.simulado']).filter(Boolean)
           ),
         ];
         setSimulados(unique);
@@ -27,7 +27,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 423 }); // Look para escolas
         const unique = [
           ...new Set(
-            response.map((item) => item['participacoes_saeb.escola']).filter(Boolean)
+            (response.data || []).map((item) => item['participacoes_saeb.escola']).filter(Boolean)
           ),
         ];
         setEscolas(unique);
@@ -41,7 +41,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 424 }); // Look para fases
         const unique = [
           ...new Set(
-            response.map((item) => item['participacoes_saeb.fase']).filter(Boolean)
+            (response.data || []).map((item) => item['participacoes_saeb.fase']).filter(Boolean)
           ),
         ];
         setFases(unique);
@@ -55,7 +55,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 425 }); // Look para turmas
         const unique = [
           ...new Set(
-            response.map((item) => item['participacoes_saeb.turma']).filter(Boolean)
+            (response.data || []).map((item) => item['participacoes_saeb.turma']).filter(Boolean)
           ),
         ];
         setTurmas(unique);

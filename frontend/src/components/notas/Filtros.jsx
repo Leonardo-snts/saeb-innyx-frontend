@@ -14,7 +14,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 426 }); // Look para simulados
         const unique = [
           ...new Set(
-            response.map((item) => item['desempenho_notas.simulado']).filter(Boolean)
+            (response.data || []).map((item) => item['desempenho_notas.simulado']).filter(Boolean)
           ),
         ];
         setSimulados(unique);
@@ -28,7 +28,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 427 }); // Look para distritos
         const unique = [
           ...new Set(
-            response.map((item) => item['desempenho_notas.distrito']).filter(Boolean)
+            (response.data || []).map((item) => item['desempenho_notas.distrito']).filter(Boolean)
           ),
         ];
         setDistritos(unique);
@@ -42,7 +42,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 428 }); // Look para escolas
         const unique = [
           ...new Set(
-            response.map((item) => item['desempenho_notas.escola']).filter(Boolean)
+            (response.data || []).map((item) => item['desempenho_notas.escola']).filter(Boolean)
           ),
         ];
         setEscolas(unique);
@@ -56,7 +56,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 429 }); // Look para fases
         const unique = [
           ...new Set(
-            response.map((item) => item['desempenho_notas.fase']).filter(Boolean)
+            (response.data || []).map((item) => item['desempenho_notas.fase']).filter(Boolean)
           ),
         ];
         setFases(unique);
@@ -70,7 +70,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 430 }); // Look para turmas
         const unique = [
           ...new Set(
-            response.map((item) => item['desempenho_notas.turma']).filter(Boolean)
+            (response.data || []).map((item) => item['desempenho_notas.turma']).filter(Boolean)
           ),
         ];
         setTurmas(unique);

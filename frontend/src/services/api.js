@@ -59,9 +59,9 @@ export async function getAllParticipacoesData(filters = {}) {
     ]);
 
     return {
-      tabela: tabelaData,
-      distrito: distritoData,
-      total: totalData
+      tabela: tabelaData.data || [],
+      distrito: distritoData.data || [],
+      total: totalData.data || []
     };
   } catch (error) {
     console.error('Erro ao buscar todos os dados:', error);
@@ -139,9 +139,9 @@ export async function getAllNotasData(filters = {}) {
     ]);
 
     return {
-      acertos: scoreAcertos,
-      erros: scoreErros,
-      distrito: colunaDistrito
+      acertos: scoreAcertos.data || [],
+      erros: scoreErros.data || [],
+      distrito: colunaDistrito.data || []
     };
   } catch (error) {
     console.error('Erro ao buscar todos os dados de notas:', error);
@@ -202,9 +202,9 @@ export async function getAllMediasData(filters = {}) {
     ]);
 
     return {
-      mediaLP: mediaLP,
-      mediaMA: mediaMA,
-      distrito: colunaDistrito
+      mediaLP: mediaLP.data || [],
+      mediaMA: mediaMA.data || [],
+      distrito: colunaDistrito.data || []
     };
   } catch (error) {
     console.error('Erro ao buscar todos os dados de médias:', error);
@@ -263,8 +263,8 @@ export async function getAllEstatisticaData(filters = {}) {
     console.log('📋 Dados da tabela item:', tabelaItem);
 
     const result = {
-      graficoColuna: graficoColuna,
-      tabelaItem: tabelaItem
+      graficoColuna: graficoColuna.data || [],
+      tabelaItem: tabelaItem.data || []
     };
 
     console.log('✅ Resultado final getAllEstatisticaData:', result);
@@ -277,12 +277,16 @@ export async function getAllEstatisticaData(filters = {}) {
 
 // ======================================== TELA TURMA ========================================
 
-export async function getTabelaTurma(filters = {}) {
+export async function getTabelaTurma(filters = {}, page = 1, limit = 100, paginated = true) {
   try {
     const params = {
       lookId: 498,
+      page,
+      limit,
+      paginated: paginated ? 'true' : 'false',
       ...filters,
     };
+    
     console.log('📋 getTabelaTurma - params:', params);
     
     const response = await axios.get(`${BASE_URL}/processes`, { params });
@@ -295,14 +299,12 @@ export async function getTabelaTurma(filters = {}) {
   }
 }
 
-export async function getAllTurmaData(filters = {}) {
+export async function getAllTurmaData(filters = {}, page = 1, limit = 100) {
   try {
     console.log('📡 getAllTurmaData recebeu filtros:', filters);
     
-    const [tabelaTurma] = await Promise.all([
-      getTabelaTurma(filters)
-    ]);
-
+    const tabelaTurma = await getTabelaTurma(filters, page, limit, true);
+    
     console.log('📋 Dados da tabela turma:', tabelaTurma);
 
     const result = {

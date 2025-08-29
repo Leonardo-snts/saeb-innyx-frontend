@@ -14,7 +14,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 499 }); // Look para simulados
         const unique = [
           ...new Set(
-            response.map((item) => item['relatorio_turma_saeb.Simulados']).filter(Boolean)
+            (response.data || []).map((item) => item['relatorio_turma_saeb.Simulados']).filter(Boolean)
           ),
         ];
         setSimulados(unique);
@@ -28,7 +28,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
           const response = await getProcesses({ lookId: 500 }); // Look para distritos
           const unique = [
             ...new Set(
-              response.map((item) => item['relatorio_turma_saeb.Distrito']).filter(Boolean)
+              (response.data || []).map((item) => item['relatorio_turma_saeb.Distrito']).filter(Boolean)
             ),
           ];
           setDistritos(unique);
@@ -42,7 +42,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 501 }); // Look para escolas
         const unique = [
           ...new Set(
-            response.map((item) => item['relatorio_turma_saeb.Escola']).filter(Boolean)
+            (response.data || []).map((item) => item['relatorio_turma_saeb.Escola']).filter(Boolean)
           ),
         ];
         setEscolas(unique);
@@ -56,7 +56,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 502 }); // Look para fases
         const unique = [
           ...new Set(
-            response.map((item) => item['relatorio_turma_saeb.Ano']).filter(Boolean)
+            (response.data || []).map((item) => item['relatorio_turma_saeb.Ano']).filter(Boolean)
           ),
         ];
         setFases(unique);
@@ -70,7 +70,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 503 }); // Look para turmas
         const unique = [
           ...new Set(
-            response.map((item) => item['relatorio_turma_saeb.Turma']).filter(Boolean)
+            (response.data || []).map((item) => item['relatorio_turma_saeb.Turma']).filter(Boolean)
           ),
         ];
         setTurmas(unique);

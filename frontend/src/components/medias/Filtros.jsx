@@ -14,7 +14,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 431 }); // Look para simulados
         const unique = [
           ...new Set(
-            response.map((item) => item['medias_saeb.simulado']).filter(Boolean)
+            (response.data || []).map((item) => item['medias_saeb.simulado']).filter(Boolean)
           ),
         ];
         setSimulados(unique);
@@ -28,7 +28,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 432 }); // Look para distritos
         const unique = [
           ...new Set(
-            response.map((item) => item['medias_saeb.distrito']).filter(Boolean)
+            (response.data || []).map((item) => item['medias_saeb.distrito']).filter(Boolean)
           ),
         ];
         setDistritos(unique);
@@ -42,7 +42,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 433 }); // Look para escolas
         const unique = [
           ...new Set(
-            response.map((item) => item['medias_saeb.escola']).filter(Boolean)
+            (response.data || []).map((item) => item['medias_saeb.escola']).filter(Boolean)
           ),
         ];
         setEscolas(unique);
@@ -56,7 +56,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 434 }); // Look para fases
         const unique = [
           ...new Set(
-            response.map((item) => item['medias_saeb.fase']).filter(Boolean)
+            (response.data || []).map((item) => item['medias_saeb.fase']).filter(Boolean)
           ),
         ];
         setFases(unique);
@@ -70,7 +70,7 @@ const Filtros = ({ filters, onFilterChange, onClearFilters }) => {
         const response = await getProcesses({ lookId: 435 }); // Look para turmas
         const unique = [
           ...new Set(
-            response.map((item) => item['medias_saeb.turma']).filter(Boolean)
+            (response.data || []).map((item) => item['medias_saeb.turma']).filter(Boolean)
           ),
         ];
         setTurmas(unique);
