@@ -324,3 +324,67 @@ export async function getAllTurmaData(filters = {}, page = 1, limit = 100, sortC
     throw error;
   }
 }
+
+// ======================================== TELA EVOLUÇÃO ========================================
+
+export async function getParticipacao(filters = {}) {
+  try {
+    const params = {
+      lookId: 508,
+      ...filters,
+    };
+    const response = await axios.get(`${BASE_URL}/processes`, { params });
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar dados de participação:', error);
+    throw error;
+  }
+}
+
+export async function getAcertosErros(filters = {}) {
+  try {
+    const params = {
+      lookId: 509,
+      ...filters,
+    };
+    const response = await axios.get(`${BASE_URL}/processes`, { params });
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar dados de acertos e erros:', error);
+    throw error;
+  }
+}
+
+export async function getComponenteCurricular(filters = {}) {
+  try {
+    const params = {
+      lookId: 510,
+      ...filters,
+    };
+    const response = await axios.get(`${BASE_URL}/processes`, { params });
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar dados de componente curricular:', error);
+    throw error;
+  }
+}
+
+export async function getAllEvolucaoData(filters = {}) {
+  try {
+    const [participacao, acertosErros, componenteCurricular] = await Promise.all([
+      getParticipacao(filters),
+      getAcertosErros(filters),
+      getComponenteCurricular(filters)
+    ]);
+
+    return {
+      participacao: participacao.data || [],
+      acertosErros: acertosErros.data || [],
+      componenteCurricular: componenteCurricular.data || []
+    };
+  }
+  catch (error) {
+    console.error('Erro ao buscar todos os dados de evolução:', error);
+    throw error;
+  }
+}

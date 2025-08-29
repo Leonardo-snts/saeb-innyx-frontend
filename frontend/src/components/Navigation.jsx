@@ -91,6 +91,23 @@ const Navigation = () => {
             className="w-6 h-6 filter brightness-0 invert"
           />
         </Link>
+
+        {/* Evolução */}
+        <Link
+          to="/evolucao"
+          className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ${
+            location.pathname === '/evolucao'
+              ? 'bg-blue-800 shadow-lg scale-110'
+              : 'bg-cyan-600 hover:bg-cyan-800 hover:scale-105'
+          }`}
+          title="Evolução"
+        >
+          <img 
+            src="/icons/progress.svg" 
+            alt="Evolução" 
+            className="w-6 h-6 filter brightness-0 invert"
+          />
+        </Link>
       </div>
     </nav>
   );

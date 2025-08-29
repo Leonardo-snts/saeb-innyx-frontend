@@ -6,6 +6,7 @@ import Notas from './pages/Notas';
 import Medias from './pages/Medias';
 import Estatistica from './pages/Estatistica';
 import Turma from './pages/Turma';
+import Evolucao from './pages/Evolucao';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/medias" element={<Medias />} />
           <Route path="/estatistica" element={<Estatistica />} />
           <Route path="/turma" element={<Turma />} />
+          <Route path="/evolucao" element={<Evolucao />} />
         </Routes>
       </div>
     </Router>
