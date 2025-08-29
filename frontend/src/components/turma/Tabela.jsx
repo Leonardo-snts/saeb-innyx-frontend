@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-const Tabela = ({ data, loading, onItemClick, onClearFilter, onSort, sortConfig }) => {
-    console.log('🎨 Tabela Turma renderizando com:', { data, loading, onItemClick, onClearFilter, onSort, sortConfig });
+const Tabela = ({ data, loading, onItemClick, onClearFilter, onSort, sortConfig, pagination, onPageChange, onPageSizeChange, pageSize }) => {
+    console.log('🎨 Tabela Turma renderizando com:', { data, loading, onItemClick, onClearFilter, onSort, sortConfig, pagination, pageSize });
 
     // Função para truncar texto com mais de X caracteres
     const truncateText = (text, maxLength = 20) => {
@@ -73,10 +73,10 @@ const Tabela = ({ data, loading, onItemClick, onClearFilter, onSort, sortConfig 
     }
 
     return (
-        <div className="bg-white overflow-hidden shadow-sm border border-gray-200">
+        <div className="bg-white overflow-hidden">
             <div className="overflow-x-auto">
                 <div className="min-w-full inline-block align-middle">
-                    <div className="overflow-y-auto max-h-[400px]">
+                    <div className="overflow-y-auto max-h-[600px]">
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-[#033f41]">
                                 <tr>
@@ -337,6 +337,48 @@ const Tabela = ({ data, loading, onItemClick, onClearFilter, onSort, sortConfig 
                     </div>
                 </div>
             </div>
+            
+            {/* Botão de navegação rápida - abaixo da tabela */}
+            {pagination && (
+                <div className="mt-4 flex justify-end">
+                    <div className="flex items-center space-x-3 bg-white px-4 py-2">
+                        {/* Botão Anterior */}
+                        <button
+                            onClick={() => onPageChange && onPageChange(pagination.page - 1)}
+                            disabled={!pagination.hasPrev}
+                            className={`p-2 rounded-md transition-colors ${
+                                pagination.hasPrev 
+                                    ? 'text-gray-600 hover:bg-gray-100 cursor-pointer' 
+                                    : 'text-gray-300 cursor-not-allowed'
+                            }`}
+                        >
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                        </button>
+                        
+                        {/* Indicador de página */}
+                        <div className="text-sm font-medium text-gray-700 min-w-[120px] text-center">
+                            {((pagination.page - 1) * pagination.limit) + 1} - {Math.min(pagination.page * pagination.limit, pagination.total)} / {pagination.total.toLocaleString()}
+                        </div>
+                        
+                        {/* Botão Próximo */}
+                        <button
+                            onClick={() => onPageChange && onPageChange(pagination.page + 1)}
+                            disabled={!pagination.hasNext}
+                            className={`p-2 rounded-md transition-colors ${
+                                pagination.hasNext 
+                                    ? 'text-gray-600 hover:bg-gray-100 cursor-pointer' 
+                                    : 'text-gray-300 cursor-not-allowed'
+                            }`}
+                        >
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
