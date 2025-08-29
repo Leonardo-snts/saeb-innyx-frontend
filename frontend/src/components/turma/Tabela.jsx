@@ -306,7 +306,7 @@ const Tabela = ({ data, loading, onItemClick, onClearFilter, onSort, sortConfig,
                                                     className="text-blue-600 hover:text-blue-800 underline"
                                                     onClick={(e) => e.stopPropagation()}
                                                 >
-                                                    Ver Cartão
+                                                    🔗
                                                 </a>
                                             ) : (
                                                 '--'
